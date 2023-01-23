@@ -1,0 +1,32 @@
+
+.bg-navigator{
+	text-align: left;
+	/*background: url(../images/pattern.png)repeat 0px 0px;*/
+	/*background-color: rgb(134, 0, 23);*/
+	background: #eeeeee;
+	color: #ffffff;
+	display: block;
+	margin: 0 auto;
+}
+
+.bg-navigator a:nth-child(1){
+	padding: 15px 15px;
+	display: inline-block;
+	text-decoration: none;
+	border-right: solid 1px #dbdbdb;
+	color: #f07e2b;
+	font-weight: 400;
+}
+
+.bg-navigator a{
+	padding: 15px 15px;
+	display: inline-block;
+	text-decoration: none;
+	color: #6f6f6f;
+}
+
+
+
+@media (max-width: 992px) {
+
+}

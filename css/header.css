@@ -1,0 +1,100 @@
+
+header{
+	background: #ffffff;
+}
+
+#bg-section{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: #ffffff;
+}
+
+#bg-section p{
+	color: #231f20;
+	margin-bottom: 0px;
+}
+
+#top-header {
+	padding: 1px 0px;
+	margin: 10px;
+	color: #6f6f6f;
+}
+#top-header .icofont-phone {
+	text-align: center;
+	font-size: 16px;
+	display: inline-block;
+	margin-right: 10px;
+	width: 25px;
+	height: 25px;
+	border: 1px solid #402c1e;
+	color: #402c1e;
+	border-radius: 100%;
+	padding: 4px 0px;
+}
+#top-header .whatsapp {
+	font-family: 'Conv_FREESCPT';
+	color: #3b2c31;
+	font-size: 25px;
+	margin-right: 15px;
+}
+
+
+#top-header .box-lang {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+#top-header .box-lang a{
+	color: #000000;
+	font-size: 11px;
+	line-height: 11px;
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 50px;
+	border: 1px solid #f07e2b;
+}
+
+#top-header .box-lang a:hover{
+	color: #000000;
+	background: #dddddd;
+}
+
+
+
+#top-header .box-lang a:hover{
+	color: #000000;
+	background: #dcdcdc;
+}
+#top-header .box-lang .active{
+	color: #3b2c31;
+	background: #ffffff;
+}
+
+
+#top-header .box-lang .active {
+	color: #3b2c31;
+	background: #f07e2b;
+}
+
+
+
+@media (max-width: 992px) {
+
+}
+#logo-section .box-logo .logo-img img{
+	width: 80px;
+	transform: scale(1.85);
+}
+#logo-section .box-logo .logo-img{
+	display: inline-block;
+	margin-right: 75px;
+	float: left;
+}
+
+
+@media (min-width: 992px) {
+
+
+
+
+}

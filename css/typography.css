@@ -1,0 +1,216 @@
+/*
+Font Family
+=========================== */
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,600");
+
+/* Typography 
+=========================== */
+html, body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden !important;
+}
+body {
+    color: #6f6f6f;
+    background: #fff;
+    font-family: 'Prompt', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 300;
+}
+a {
+    outline: 0;
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-transition: all 0.3s ease-in-out;
+    -khtml-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+a:focus {
+    outline: 0;
+}
+a:hover {
+    text-decoration: none;
+}
+a.link {
+    color: #6a6a6a;
+    text-decoration: none;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #f07e2b;
+    margin: 0 0 15px 0;
+    font-size: 48px;
+    font-family: 'Prompt', sans-serif;
+    font-weight: 500;
+    line-height: 52px;
+    /* text-transform: uppercase; */
+}
+h2 {
+    font-size: 54px;
+    line-height: 48px;
+    /* margin: 35px; */
+}
+h3 {
+    font-size: 30px;
+    line-height: 36px;
+}
+h4 {
+    font-size: 25px;
+    line-height: 30px;
+}
+h5 {
+    font-size: 20px;
+    line-height: 34px;
+    color: #6f6f6f;
+    font-weight: 300;
+}
+h6 {
+    font-size: 14px;
+    line-height: 18px;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+i.h1{font-size: 90px;margin-bottom: 30px;}
+.section{
+    padding: 100px 0;
+    border-top: solid 1px #efefef;
+}
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.material-icons-sharp {
+    vertical-align: sub;
+    /* font-size: inherit; */
+    color: #ffffff;
+}
+
+#news-section h2 span{
+    font-weight: 200;
+    color: #333333;
+
+}
+
+#news-section h4{
+    
+    color: #333333;
+
+}
+
+
+.item-new{
+    display: block;
+    background: #f4f7ec;
+    color: #4a4a4a;
+    /* margin-bottom: 30px; */
+}
+.item-new h4{
+  -webkit-transition: all 0.3s ease-in-out;
+  -khtml-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; 
+}
+.item-new:hover h4{
+    color: #ffffff;
+    -webkit-transition: all 0.3s ease-in-out;
+    -khtml-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.item-new:hover{
+ background: #82b60b;
+ color: #ffffff;
+ -webkit-transition: all 0.3s ease-in-out;
+ -khtml-transition: all 0.3s ease-in-out;
+ -moz-transition: all 0.3s ease-in-out;
+ -ms-transition: all 0.3s ease-in-out;
+ -o-transition: all 0.3s ease-in-out;
+ transition: all 0.3s ease-in-out;
+}
+.item-new span{
+    color: #82b60b;
+    font-weight: 500;
+    -webkit-transition: all 0.3s ease-in-out;
+    -khtml-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.item-new:hover span{
+    color: #ffffff;
+    -webkit-transition: all 0.3s ease-in-out;
+    -khtml-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+
+a:hover {
+    text-decoration: none;
+}
+
+.material-icons-outlined, .material-icons, .material-icons-round, .material-icons-sharp {
+    vertical-align: sub;
+    font-size: inherit;
+}
+
+.material-icons-outlined, .material-icons, .material-icons-sharp {
+    vertical-align: sub;
+    font-size: inherit;
+}
+
+
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+
+    .pink {position: relative;margin-top: 0px;}
+
+}
+
+
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+@media (min-width: 1400px){
+    .core-nav .nav-container {
+        width: 1320px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
