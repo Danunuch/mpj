@@ -6,7 +6,7 @@ if (!isset($_SESSION['admin_login'])) {
     echo "<meta http-equiv='refresh' content='0;url=index'>";
 }
 
-$stmt = $conn->prepare("SELECT * FROM about");
+$stmt = $conn->prepare("SELECT * FROM about_en");
 $stmt->execute();
 $row_about = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -52,8 +52,8 @@ $row_about = $stmt->fetch(PDO::FETCH_ASSOC);
                     <div class="card-header">
                         <h4 class="card-title">About the Group</h4>
                         <div class="box-lang">
-                            <a href="about_en"><button type="button" class="btn btn-edit">EN</button></a>
-                            <a href="about_edit"><button type="button" class="btn btn-edit1">Edit</button></a>
+                            <a href="about"><button type="button" class="btn btn-edit">TH</button></a>
+                            <a href="about_edit_en"><button type="button" class="btn btn-edit1">Edit</button></a>
                         </div>
                     </div>
                     <div class="card-body">

@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin_login'])) {
 
 
 
-$about = $conn->prepare("SELECT * FROM about");
+$about = $conn->prepare("SELECT * FROM about_en");
 $about->execute();
 $row_about = $about->fetch(PDO::FETCH_ASSOC);
 
@@ -24,7 +24,7 @@ if (isset($_POST['edit-about'])) {
     $id = 1;
 
 
-    $stmt = $conn->prepare("SELECT * FROM about WHERE id = :id");
+    $stmt = $conn->prepare("SELECT * FROM about_en WHERE id = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
     $row_about = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -39,7 +39,7 @@ if (isset($_POST['edit-about'])) {
     if (in_array($fileActExt1, $allow)) {
         if ($img['size'] > 0 && $img['error'] == 0) {
             if (move_uploaded_file($img['tmp_name'], $filePath1)) {
-                $edit_about = $conn->prepare("UPDATE about SET content = :content, img = :img WHERE id = :id");
+                $edit_about = $conn->prepare("UPDATE about_en SET content = :content, img = :img WHERE id = :id");
                 $edit_about->bindParam(":content", $content);
                 $edit_about->bindParam(":img", $fileNew1);
                 $edit_about->bindParam(":id", $id);
@@ -55,7 +55,7 @@ if (isset($_POST['edit-about'])) {
                         });
                     })
                     </script>";
-                    echo "<meta http-equiv='refresh' content='2;url=about'>";
+                    echo "<meta http-equiv='refresh' content='2;url=about_en'>";
                 } else {
                     echo "<script>
                     $(document).ready(function() {
@@ -71,7 +71,7 @@ if (isset($_POST['edit-about'])) {
             }
         }
     } else {
-        $edit_about = $conn->prepare("UPDATE about SET content = :content WHERE id = :id");
+        $edit_about = $conn->prepare("UPDATE about_en SET content = :content WHERE id = :id");
         $edit_about->bindParam(":content", $content);
         $edit_about->bindParam(":id", $id);
         $edit_about->execute();
@@ -86,7 +86,7 @@ if (isset($_POST['edit-about'])) {
                 });
             })
             </script>";
-            echo "<meta http-equiv='refresh' content='2;url=about'>";
+            echo "<meta http-equiv='refresh' content='2;url=about_en'>";
         } else {
             echo "<script>
             $(document).ready(function() {

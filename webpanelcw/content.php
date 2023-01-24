@@ -3,7 +3,7 @@ require_once('config/mpj_db.php');
 session_start();
 if (!isset($_SESSION['admin_login'])) {
     echo "<script>alert('Please Login')</script>";
-    echo "<meta http-equiv='refresh' content='0;url=login'>";
+    echo "<meta http-equiv='refresh' content='0;url=index'>";
 }
 
 $stmt = $conn->prepare("SELECT * FROM content");

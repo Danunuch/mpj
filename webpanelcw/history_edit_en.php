@@ -13,38 +13,38 @@ if (!isset($_SESSION['admin_login'])) {
 
 
 
-$about = $conn->prepare("SELECT * FROM about");
-$about->execute();
-$row_about = $about->fetch(PDO::FETCH_ASSOC);
+$history = $conn->prepare("SELECT * FROM history_en");
+$history->execute();
+$row_history = $history->fetch(PDO::FETCH_ASSOC);
 
 
-if (isset($_POST['edit-about'])) {
+if (isset($_POST['edit-history'])) {
     $content = $_POST['content'];
     $img = $_FILES['img'];
     $id = 1;
 
 
-    $stmt = $conn->prepare("SELECT * FROM about WHERE id = :id");
+    $stmt = $conn->prepare("SELECT * FROM history_en WHERE id = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    $row_about = $stmt->fetch(PDO::FETCH_ASSOC);
+    $row_history = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
     $allow = array('jpg', 'jpeg', 'png', 'webp');
     $extention1 = explode(".", $img['name']); //เเยกชื่อกับนามสกุลไฟล์
     $fileActExt1 = strtolower(end($extention1)); //แปลงนามสกุลไฟล์เป็นพิมพ์เล็ก
     $fileNew1 = rand() . "." . "webp";
-    $filePath1 = "upload/upload_about/" . $fileNew1;
+    $filePath1 = "upload/upload_history/" . $fileNew1;
 
     if (in_array($fileActExt1, $allow)) {
         if ($img['size'] > 0 && $img['error'] == 0) {
             if (move_uploaded_file($img['tmp_name'], $filePath1)) {
-                $edit_about = $conn->prepare("UPDATE about SET content = :content, img = :img WHERE id = :id");
-                $edit_about->bindParam(":content", $content);
-                $edit_about->bindParam(":img", $fileNew1);
-                $edit_about->bindParam(":id", $id);
-                $edit_about->execute();
-                if ($edit_about) {
+                $edit_history = $conn->prepare("UPDATE history_en SET content = :content, img = :img WHERE id = :id");
+                $edit_history->bindParam(":content", $content);
+                $edit_history->bindParam(":img", $fileNew1);
+                $edit_history->bindParam(":id", $id);
+                $edit_history->execute();
+                if ($edit_history) {
                     echo "<script>
                     $(document).ready(function() {
                         Swal.fire({
@@ -55,7 +55,7 @@ if (isset($_POST['edit-about'])) {
                         });
                     })
                     </script>";
-                    echo "<meta http-equiv='refresh' content='2;url=about'>";
+                    echo "<meta http-equiv='refresh' content='2;url=history_en'>";
                 } else {
                     echo "<script>
                     $(document).ready(function() {
@@ -71,11 +71,11 @@ if (isset($_POST['edit-about'])) {
             }
         }
     } else {
-        $edit_about = $conn->prepare("UPDATE about SET content = :content WHERE id = :id");
-        $edit_about->bindParam(":content", $content);
-        $edit_about->bindParam(":id", $id);
-        $edit_about->execute();
-        if ($edit_about) {
+        $edit_history = $conn->prepare("UPDATE history_en SET content = :content WHERE id = :id");
+        $edit_history->bindParam(":content", $content);
+        $edit_history->bindParam(":id", $id);
+        $edit_history->execute();
+        if ($edit_history) {
             echo "<script>
             $(document).ready(function() {
                 Swal.fire({
@@ -86,7 +86,7 @@ if (isset($_POST['edit-about'])) {
                 });
             })
             </script>";
-            echo "<meta http-equiv='refresh' content='2;url=about'>";
+            echo "<meta http-equiv='refresh' content='2;url=history_en'>";
         } else {
             echo "<script>
             $(document).ready(function() {
@@ -132,18 +132,18 @@ if (isset($_POST['edit-about'])) {
             </header>
 
             <div class="page-heading">
-                <h3>About Edit</h3>
+                <h3>History Edit (EN)</h3>
             </div>
             <section class="section">
             <form method="post" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title"></h4>
-                            <button type="submit" name="edit-about" class="btn btn-save">Save</button>
+                            <button type="submit" name="edit-history" class="btn btn-save">Save</button>
                         </div>
                         <div class="card-body">
                             <h5>Content</h5>
-                            <textarea name="content"><?php echo $row_about['content']; ?></textarea>
+                            <textarea name="content"><?php echo $row_history['content']; ?></textarea>
                             <script>
                                 tinymce.init({
                                     selector: 'textarea',
@@ -174,7 +174,7 @@ if (isset($_POST['edit-about'])) {
                                 </div>
                                 <span style="color: #ff4122;">Only file are support ('jpg', 'jpeg', 'png', 'webp').</span>
                                 <div class="preview-img">
-                                    <img id="previewImg" width="100%" src="upload/upload_about/<?php echo $row_about['img'] ?>" alt="">
+                                    <img id="previewImg" width="100%" src="upload/upload_history/<?php echo $row_history['img'] ?>" alt="">
                                 </div>
                             </div>
                         </div>

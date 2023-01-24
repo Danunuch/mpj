@@ -70,12 +70,12 @@ $row_company = $company->fetchAll();
                     <ul class="submenu">
                         <li class="submenu-item">
                             <a href="about" class="sidebar-link">About the Group</a>
-                            <a href="#" class="sidebar-link">History</a>
-                            <a href="#" class="sidebar-link">Vision</a>
-                            <a href="#" class="sidebar-link">Structure</a>
-                            <a href="#" class="sidebar-link">Board of Directors</a>
-                            <a href="#" class="sidebar-link">Certifications</a>
-                            <a href="#" class="sidebar-link">Business Ethics</a>
+                            <a href="history" class="sidebar-link">History</a>
+                            <a href="vision" class="sidebar-link">Vision</a>
+                            <a href="structure" class="sidebar-link">Structure</a>
+                            <a href="board" class="sidebar-link">Board of Directors</a>
+                            <a href="cer" class="sidebar-link">Certifications</a>
+                            <a href="ethics" class="sidebar-link">Business Ethics</a>
 
                         </li>
                     </ul>
@@ -90,7 +90,7 @@ $row_company = $company->fetchAll();
                     <ul class="submenu">
                         <li class="submenu-item">
                             <?php for ($i = 0; $i < count($row_company); $i++) { ?>
-                                <a href="#" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
+                                <a href="detail_company?id=<?php echo $row_company[$i]['company_name']; ?>" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
                             <?php } ?>
 
 

@@ -6,9 +6,9 @@ if (!isset($_SESSION['admin_login'])) {
     echo "<meta http-equiv='refresh' content='0;url=index'>";
 }
 
-$stmt = $conn->prepare("SELECT * FROM about");
+$stmt = $conn->prepare("SELECT * FROM board");
 $stmt->execute();
-$row_about = $stmt->fetch(PDO::FETCH_ASSOC);
+$row_board = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 
@@ -45,21 +45,21 @@ $row_about = $stmt->fetch(PDO::FETCH_ASSOC);
             </header>
 
             <div class="page-heading">
-                <h3>About the Group</h3>
+                <h3>Board</h3>
             </div>
             <section class="section">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">About the Group</h4>
+                        <h4 class="card-title">Board</h4>
                         <div class="box-lang">
-                            <a href="about_en"><button type="button" class="btn btn-edit">EN</button></a>
-                            <a href="about_edit"><button type="button" class="btn btn-edit1">Edit</button></a>
+                            <a href="board_en"><button type="button" class="btn btn-edit">EN</button></a>
+                            <a href="board_edit"><button type="button" class="btn btn-edit1">Edit</button></a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <?php echo $row_about['content']; ?>
+                        <?php echo $row_board['content']; ?>
                         <div class="d-flex justify-content-center align-items-center" style="margin: 30px;">
-                        <img width="50%" src="upload/upload_about/<?php echo $row_about['img']; ?>" alt="">
+                        <img width="70%" src="upload/upload_board/<?php echo $row_board['img']; ?>" alt="">
                     </div>
                 </div>
                 </div>

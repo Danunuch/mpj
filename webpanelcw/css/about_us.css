@@ -41,6 +41,12 @@ body {
     background-color: rgb(230, 126, 35);
     color: #FFFFFF;
 }
+.btn-save {
+    width: 70px;
+    height: 35px;
+    background-color: #267217;
+    color: #FFFFFF;
+}
 
 .btn-reset {
     width: 100px;
@@ -146,9 +152,15 @@ body {
     }
 
     .btn-edit1 {
-        width: 55px;
+        width: 58px;
         height: 35px;
         background-color: rgb(230, 126, 35);
+        color: #FFFFFF;
+    }
+    .btn-del {
+        width: 75px;
+        height: 35px;
+        background-color: rgb(165, 22, 22);
         color: #FFFFFF;
     }
     .btn-reset {
