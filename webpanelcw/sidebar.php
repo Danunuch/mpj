@@ -90,7 +90,7 @@ $row_company = $company->fetchAll();
                     <ul class="submenu">
                         <li class="submenu-item">
                             <?php for ($i = 0; $i < count($row_company); $i++) { ?>
-                                <a href="detail_company?id=<?php echo $row_company[$i]['company_name']; ?>" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
+                                <a href="detail_company?id=<?php echo $row_company[$i]['id']; ?>" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
                             <?php } ?>
 
 
