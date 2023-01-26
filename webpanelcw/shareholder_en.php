@@ -10,17 +10,17 @@ if (!isset($_SESSION['admin_login'])) {
     echo "<meta http-equiv='refresh' content='0;url=index'>";
 }
 
-$stmt = $conn->prepare("SELECT * FROM shareholder ORDER BY id DESC");
+$stmt = $conn->prepare("SELECT * FROM shareholder_en ORDER BY id DESC");
 $stmt->execute();
 $row_shareholder = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$stmt = $conn->prepare("SELECT * FROM sha_content");
+$stmt = $conn->prepare("SELECT * FROM sha_content_en");
 $stmt->execute();
 $row_sha_content = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (isset($_POST['delete_sha'])) {
     $id = $_POST['shareholder_id'];
-    $del_sub = $conn->prepare("DELETE FROM sha_content WHERE id = :id");
+    $del_sub = $conn->prepare("DELETE FROM sha_content_en WHERE id = :id");
     $del_sub->bindParam(":id", $id);
     $del_sub->execute();
 
@@ -35,7 +35,7 @@ if (isset($_POST['delete_sha'])) {
             });
         })
         </script>";
-        echo "<meta http-equiv='refresh' content='2;url=shareholder'>";
+        echo "<meta http-equiv='refresh' content='2;url=shareholder_en'>";
     } else {
         echo "<script>
         $(document).ready(function() {
@@ -53,12 +53,12 @@ if (isset($_POST['save_text'])) {
     $content = $_POST['content'];
 
 
-    $stmt = $conn->prepare("SELECT * FROM sha_content");
+    $stmt = $conn->prepare("SELECT * FROM sha_content_en");
     $stmt->execute();
     $row_structure = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
-    $sha_content = $conn->prepare("UPDATE sha_content SET content = :content");
+    $sha_content = $conn->prepare("UPDATE sha_content_en SET content = :content");
     $sha_content->bindParam(":content", $content);
     $sha_content->execute();
     if ($sha_content) {
@@ -72,7 +72,7 @@ if (isset($_POST['save_text'])) {
             });
         })
         </script>";
-        echo "<meta http-equiv='refresh' content='2;url=shareholder'>";
+        echo "<meta http-equiv='refresh' content='2;url=shareholder_en'>";
     } else {
         echo "<script>
         $(document).ready(function() {
@@ -126,7 +126,7 @@ if (isset($_POST['save_text'])) {
                     <div class="card-header">
                         <h4 class="card-title">Shareholder</h4>
                         <div class="box-lang">
-                            <a href="shareholder_en"><button type="button" class="btn btn-edit">EN</button></a>
+                            <a href="shareholder"><button type="button" class="btn btn-edit">TH</button></a>
                         </div>
                     </div>
 
@@ -180,7 +180,7 @@ if (isset($_POST['save_text'])) {
                                             <?php
                                             for ($i = 0; $i < count($row_shareholder); $i++) {
 
-                                                $stmt = $conn->prepare("SELECT * FROM shareholder ORDER BY id DESC");
+                                                $stmt = $conn->prepare("SELECT * FROM shareholder_en ORDER BY id DESC");
                                                 $stmt->execute();
                                                 $row_shareholder = $stmt->fetchAll(); ?>
 
@@ -192,7 +192,7 @@ if (isset($_POST['save_text'])) {
                                                         <td align="center"><?php echo $row_shareholder[$i]['percen']; ?></td>
                                                         <td align="center">
                                                             <div class="manage">
-                                                                <a href="shareholder_edit?shareholder_id=<?php echo $row_shareholder[$i]['id']; ?>"><button type="button" class="btn" style="background-color:#ffc107; color: #FFFFFF; margin:3px;"><i class="bi bi-pencil-square"></i></button></a>
+                                                                <a href="shareholder_edit_en?shareholder_id=<?php echo $row_shareholder[$i]['id']; ?>"><button type="button" class="btn" style="background-color:#ffc107; color: #FFFFFF; margin:3px;"><i class="bi bi-pencil-square"></i></button></a>
                                                                 <button class="btn" onclick="return confirm('Do you want to delete?');" name="delete_sha" style="background-color:#ff4122; color: #FFFFFF;"><i class="bi bi-trash"></i></button>
                                                             </div>
                                                         </td>
@@ -205,29 +205,6 @@ if (isset($_POST['save_text'])) {
                                         </table>
                                     </div>
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                             </div>
 

@@ -110,7 +110,7 @@ $row_company = $company->fetchAll();
                             <a href="financial" class="sidebar-link">Financial</a>
                             <a href="stock" class="sidebar-link">Stock price</a>
                             <a href="shareholder" class="sidebar-link">Shareholder</a>
-                            <a href="#" class="sidebar-link">Publication</a>
+                            <a href="publication" class="sidebar-link">Publication</a>
                             <a href="#" class="sidebar-link">Newsroom</a>
 
                         </li>
