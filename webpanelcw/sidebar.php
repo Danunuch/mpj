@@ -106,10 +106,10 @@ $row_company = $company->fetchAll();
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
-                            <a href="#" class="sidebar-link">Corporate</a>
-                            <a href="#" class="sidebar-link">Financial</a>
-                            <a href="#" class="sidebar-link">Stock price</a>
-                            <a href="#" class="sidebar-link">Shareholder</a>
+                            <a href="corporate" class="sidebar-link">Corporate</a>
+                            <a href="financial" class="sidebar-link">Financial</a>
+                            <a href="stock" class="sidebar-link">Stock price</a>
+                            <a href="shareholder" class="sidebar-link">Shareholder</a>
                             <a href="#" class="sidebar-link">Publication</a>
                             <a href="#" class="sidebar-link">Newsroom</a>
 
