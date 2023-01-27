@@ -113,7 +113,7 @@ if (isset($_POST['edit-about'])) {
 
     <link rel="stylesheet" href="assets/css/main/app.css">
     <link rel="stylesheet" href="assets/css/main/app-dark.css">
-    <link rel="stylesheet" href="css/about_us.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="css/product.css?v=<?php echo time(); ?>">
     <!-- <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon"> -->
     <link rel="shortcut icon" href="images/logo.svg" type="image/png">
 

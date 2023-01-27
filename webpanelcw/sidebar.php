@@ -84,13 +84,13 @@ $row_company = $company->fetchAll();
                 <!-- กลุ่มบริษัทในเครือ -->
                 <li class="sidebar-item  companies has-sub" id="companies">
                     <a href="companies" class='sidebar-link'>
-                        <i class="bi bi-list-ul"></i>
+                    <i class="bi bi-bank"></i>
                         <span>Affiliated companies</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
                             <?php for ($i = 0; $i < count($row_company); $i++) { ?>
-                                <a href="detail_company?id=<?php echo $row_company[$i]['id']; ?>" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
+                                <a href="<?php if($row_company[$i]['id'] == 1){echo "detail_company1";}else if($row_company[$i]['id'] == 2){echo "detail_company2";}else if($row_company[$i]['id'] == 3){echo "detail_company3";}else if($row_company[$i]['id'] == 4){echo "detail_company4";} ?>" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
                             <?php } ?>
 
 
@@ -101,7 +101,7 @@ $row_company = $company->fetchAll();
                 <!-- นักลงทุนสัมพันธ์ -->
                 <li class="sidebar-item  investor has-sub" id="investor">
                     <a href="investor" class='sidebar-link'>
-                        <i class="bi bi-list-ul"></i>
+                    <i class="bi bi-people-fill"></i>
                         <span>Investor Relations</span>
                     </a>
                     <ul class="submenu">
@@ -111,7 +111,7 @@ $row_company = $company->fetchAll();
                             <a href="stock" class="sidebar-link">Stock price</a>
                             <a href="shareholder" class="sidebar-link">Shareholder</a>
                             <a href="publication" class="sidebar-link">Publication</a>
-                            <a href="#" class="sidebar-link">Newsroom</a>
+                            <a href="news" class="sidebar-link">Newsroom</a>
 
                         </li>
                     </ul>
@@ -119,18 +119,18 @@ $row_company = $company->fetchAll();
                 <!-- การพัฒนาที่ยั่งยืน -->
                 <li class="sidebar-item sustainable has-sub" id="sustainable">
                     <a href="sustainable" class='sidebar-link'>
-                        <i class="bi bi-collection"></i>
+                    <i class="bi bi-globe"></i>
                         <span>Sustainable dev</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
-                            <a href="#" class="sidebar-link">Policy</a>
-                            <a href="#" class="sidebar-link">Safety</a>
-                            <a href="#" class="sidebar-link">Measure</a>
-                            <a href="#" class="sidebar-link">Social policy</a>
-                            <a href="#" class="sidebar-link">Use of personal</a>
-                            <a href="#" class="sidebar-link">Regulations</a>
-                            <a href="#" class="sidebar-link">Activity</a>
+                        <a href="policy" class="sidebar-link">Policy</a>
+                            <a href="safety" class="sidebar-link">Safety</a>
+                            <a href="measure" class="sidebar-link">Measure</a>
+                            <a href="social_policy" class="sidebar-link">Social policy</a>
+                            <a href="use_of_personal" class="sidebar-link">Use of personal</a>
+                            <a href="regulation" class="sidebar-link">Regulations</a>
+                            <a href="activity" class="sidebar-link">Activity</a>
                         </li>
                     </ul>
                 </li>

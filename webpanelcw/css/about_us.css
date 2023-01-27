@@ -67,7 +67,7 @@
 
 .btn-save:hover {
     background-color: rgb(255, 255, 255);
-    color: #FFF;
+    color: rgb(0, 0, 0);
 }
 
 .group-pos {
@@ -198,5 +198,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .btn-save {
+        background-color: rgb(52, 129, 52);
+        color: #FFF;
+        /* display: flex; */
+        margin: 10px auto;
     }
 }

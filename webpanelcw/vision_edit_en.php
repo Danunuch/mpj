@@ -29,13 +29,13 @@ if (isset($_POST['edit-vision'])) {
     $row_vision = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
-    
-                $edit_vision = $conn->prepare("UPDATE vision_en SET content = :content WHERE id = :id");
-                $edit_vision->bindParam(":content", $content);
-                $edit_vision->bindParam(":id", $id);
-                $edit_vision->execute();
-                if ($edit_vision) {
-                    echo "<script>
+
+    $edit_vision = $conn->prepare("UPDATE vision_en SET content = :content WHERE id = :id");
+    $edit_vision->bindParam(":content", $content);
+    $edit_vision->bindParam(":id", $id);
+    $edit_vision->execute();
+    if ($edit_vision) {
+        echo "<script>
                     $(document).ready(function() {
                         Swal.fire({
                             text: 'The edit has been completed.',
@@ -45,9 +45,9 @@ if (isset($_POST['edit-vision'])) {
                         });
                     })
                     </script>";
-                    echo "<meta http-equiv='refresh' content='2;url=vision_en'>";
-                } else {
-                    echo "<script>
+        echo "<meta http-equiv='refresh' content='2;url=vision_en'>";
+    } else {
+        echo "<script>
                     $(document).ready(function() {
                         Swal.fire({
                             text: 'Something Went Wrong!!!',
@@ -57,9 +57,9 @@ if (isset($_POST['edit-vision'])) {
                         });
                     })
                     </script>";
-                }
-            }
-     
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -98,9 +98,11 @@ if (isset($_POST['edit-vision'])) {
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title"></h4>
-                            <button type="submit" name="edit-vision" class="btn btn-save">Save</button>
+                            <div class="flex-end">
+                                <button type="submit" name="edit-vision" class="btn btn-save">Save</button>
+                            </div>
                         </div>
-                        <div class="card-body">
+                        <div class="container" style="padding: 30px;">
                             <h5>Content</h5>
                             <textarea name="content"><?php echo $row_vision['content']; ?></textarea>
                             <script>
@@ -123,7 +125,7 @@ if (isset($_POST['edit-vision'])) {
                                 });
                             </script>
                         </div>
-                     
+
                     </div>
                 </form>
             </section>

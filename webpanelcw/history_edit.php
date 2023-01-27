@@ -135,19 +135,21 @@ if (isset($_POST['edit-history'])) {
                 <h3>History Edit (TH)</h3>
             </div>
             <section class="section">
-            <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title"></h4>
-                            <button type="submit" name="edit-history" class="btn btn-save">Save</button>
+                            <div class="flex-end">
+                                <button type="submit" name="edit-history" class="btn btn-save">Save</button>
+                            </div>
                         </div>
-                        <div class="card-body">
+                        <div class="container" style="padding: 30px;">
                             <h5>Content</h5>
                             <textarea name="content"><?php echo $row_history['content']; ?></textarea>
                             <script>
                                 tinymce.init({
                                     selector: 'textarea',
-                                    branding:false,
+                                    branding: false,
                                     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
                                     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                                     tinycomments_mode: 'embedded',
@@ -164,17 +166,18 @@ if (isset($_POST['edit-history'])) {
                                 });
                             </script>
                         </div>
-                        <div class="card-body">
-                            <h5>Image</h5>
+                        <div class="container" style="padding: 30px;">
                             <div class="box-upload-img">
                                 <h5>Upload Image here</h5>
                                 <div class="box-input-upload">
                                     <input type="file" id="imgInput" name="img" class="form-control">
-                                    <button type="button" id="reset" class="btn btn-reset">Reset</button>
+                                    <!-- <button type="button" id="reset" class="btn btn-reset">Reset</button> -->
                                 </div>
                                 <span style="color: #ff4122;">Only file are support ('jpg', 'jpeg', 'png', 'webp').</span>
                                 <div class="preview-img">
-                                    <img id="previewImg" width="100%" src="upload/upload_history/<?php echo $row_history['img'] ?>" alt="">
+                                    <div class="d-flex justify-content-center">
+                                        <img id="previewImg" width="60%" src="upload/upload_history/<?php echo $row_history['img'] ?>" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>

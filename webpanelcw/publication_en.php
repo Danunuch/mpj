@@ -6,7 +6,7 @@ session_start();
 error_reporting(0);
 if (!isset($_SESSION['admin_login'])) {
     echo "<script>alert('Please Login')</script>";
-    echo "<meta http-equiv='refresh' content='0;url=login'>";
+    echo "<meta http-equiv='refresh' content='0;url=index'>";
 }
 
 

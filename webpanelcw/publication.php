@@ -6,7 +6,7 @@ session_start();
 error_reporting(0);
 if (!isset($_SESSION['admin_login'])) {
     echo "<script>alert('Please Login')</script>";
-    echo "<meta http-equiv='refresh' content='0;url=login'>";
+    echo "<meta http-equiv='refresh' content='0;url=index'>";
 }
 
 
@@ -29,7 +29,7 @@ $row_publi = $data_publi->fetchAll();
     <link rel="stylesheet" href="assets/css/main/app.css">
     <link rel="stylesheet" href="assets/css/main/app-dark.css">
     <!-- <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon"> -->
-    <link rel="shortcut icon" href="image/logodoj.png" type="image/png">
+    <link rel="shortcut icon" href="images/logo.svg" type="image/png">
 
     <link rel="stylesheet" href="assets/css/shared/iconly.css">
     <link rel="stylesheet" href="css/product.css?v=<?php echo time();?>">
@@ -75,7 +75,7 @@ $row_publi = $data_publi->fetchAll();
                                     </thead>
                                     <?php
                                     for ($i = 0; $i < count($row_publi); $i++) {
-                                        $id = $row_service[$i]["id"];
+                                        $id = $row_publi[$i]["id"];
                                       
 
                                     ?>

@@ -56,7 +56,7 @@ $row_structure = $stmt->fetch(PDO::FETCH_ASSOC);
                             <a href="structure_edit_en"><button type="button" class="btn btn-edit1">Edit</button></a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="container">
                         <?php echo $row_structure['content']; ?>
                         <div class="d-flex justify-content-center align-items-center" style="margin: 30px;">
                         <img width="70%" src="upload/upload_structure/<?php echo $row_structure['img']; ?>" alt="">

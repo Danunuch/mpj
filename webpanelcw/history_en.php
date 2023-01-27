@@ -56,12 +56,12 @@ $row_history = $stmt->fetch(PDO::FETCH_ASSOC);
                             <a href="history_edit_en"><button type="button" class="btn btn-edit1">Edit</button></a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="container" style="padding: 30px;">
                         <?php echo $row_history['content']; ?>
-                        <div class="d-flex justify-content-center align-items-center" style="margin: 30px;">
-                        <img width="50%" src="upload/upload_history/<?php echo $row_history['img']; ?>" alt="">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img width="50%" src="upload/upload_history/<?php echo $row_history['img']; ?>" alt="">
+                        </div>
                     </div>
-                </div>
                 </div>
 
 

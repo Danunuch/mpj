@@ -56,7 +56,7 @@ $row_vision = $stmt->fetch(PDO::FETCH_ASSOC);
                             <a href="vision_edit_en"><button type="button" class="btn btn-edit1">Edit</button></a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="container" style="padding: 30px;">
                         <?php echo $row_vision['content']; ?>
                         
                 </div>

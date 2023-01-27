@@ -56,7 +56,7 @@ $row_about = $stmt->fetch(PDO::FETCH_ASSOC);
                             <a href="about_edit_en"><button type="button" class="btn btn-edit1">Edit</button></a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="container" style="padding: 30px;">
                         <?php echo $row_about['content']; ?>
                         <div class="d-flex justify-content-center align-items-center" style="margin: 30px;">
                         <img width="50%" src="upload/upload_about/<?php echo $row_about['img']; ?>" alt="">

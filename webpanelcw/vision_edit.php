@@ -94,11 +94,13 @@ if (isset($_POST['edit-vision'])) {
             <section class="section">
                 <form method="post" enctype="multipart/form-data">
                     <div class="card">
-                        <div class="card-header">
+                    <div class="card-header">
                             <h4 class="card-title"></h4>
-                            <button type="submit" name="edit-vision" class="btn btn-save">Save</button>
+                            <div class="flex-end">
+                                <button type="submit" name="edit-vision" class="btn btn-save">Save</button>
+                            </div>
                         </div>
-                        <div class="card-body">
+                        <div class="container" style="padding: 30px;">
                             <h5>Content</h5>
                             <textarea name="content"><?php echo $row_vision['content']; ?></textarea>
                             <script>
