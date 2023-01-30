@@ -223,7 +223,38 @@ if (isset($_POST['edit_blog_company'])) {
     }
 }
 
+// delete blog company4
+if (isset($_POST['delete_blog'])) {
+    $blog_id = $_POST['delete_blog'];
+    $del_blog = $conn->prepare("DELETE FROM blog_company_en WHERE id = :id");
+    $del_blog->bindParam(":id", $blog_id);
+    $del_blog->execute();
 
+    if ($del_blog) {
+        echo "<script>
+        $(document).ready(function() {
+            Swal.fire({
+                text: 'Delete Blog has been completed.',
+                icon: 'success',
+                timer: 10000,
+                showConfirmButton: false
+            });
+        })
+        </script>";
+        echo "<meta http-equiv='refresh' content='2;url=detail_company4_en'>";
+    } else {
+        echo "<script>
+        $(document).ready(function() {
+            Swal.fire({
+                text: 'Something Went Wrong!!!',
+                icon: 'error',
+                timer: 10000,
+                showConfirmButton: false
+            });
+        })
+        </script>";
+    }
+}
 
 $stmt = $conn->prepare("SELECT * FROM company4_en");
 $stmt->execute();
@@ -539,7 +570,7 @@ $row_blog_company = $stmt->fetchAll();
                                                     <td>
                                                         <form method="post">
                                                             <a type="input" data-bs-toggle="modal" href="#editactivity<?php echo $row_blog_company['id'] ?>" class="btn " style="background-color:#ffc107; color: #FFFFFF;"><i class="bi bi-pencil-square"></i></a>
-                                                            <button type="submit" class="btn" value="<?php echo $row_blog_company['id']; ?>" onclick="return confirm('You want to delete this blog?');" name="delete" style="background-color:#c3412c; color: #FFFFFF;"><i class="bi bi-trash"></i></button>
+                                                            <button type="submit" class="btn" onclick="return confirm('ต้องการลบใช่หรือไม่?')" name="delete_blog" value="<?php echo $row_blog_company['id']; ?>" style="background-color:red; color: #FFFFFF;"><i class="bi bi-trash3"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>

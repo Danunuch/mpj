@@ -16,7 +16,7 @@ if (isset($_POST['add_activity'])) {
     $topic = $_POST['topic'];
     $date = $_POST['date'];
     $content = $_POST['content'];
-    $status = "on";
+    // $status = "on";
 
     $allow = array('jpg', 'jpeg', 'png', 'webp');
     $extention1 = explode(".", $img['name']); //เเยกชื่อกับนามสกุลไฟล์
@@ -35,13 +35,13 @@ if (isset($_POST['add_activity'])) {
             if (in_array($fileActExt1, $allow)) {
                 if ($img['size'] > 0 && $img['error'] == 0) {
                     if (move_uploaded_file($img['tmp_name'], $filePath1)) {
-                        $activity = $conn->prepare("INSERT INTO activity(cover_img,topic,content,date,status)
-                                                  VALUES(:cover_img,:topic,:content,:date,:status)");
+                        $activity = $conn->prepare("INSERT INTO activity(cover_img,topic,content,date)
+                                                  VALUES(:cover_img,:topic,:content,:date)");
                         $activity->bindParam(":cover_img", $fileNew1);
                         $activity->bindParam(":topic", $topic);
                         $activity->bindParam(":content", $content);
                         $activity->bindParam(":date", $date);
-                        $activity->bindParam(":status", $status);
+                        // $activity->bindParam(":status", $status);
                         $activity->execute();
 
                         $id_activity = $conn->lastInsertId();
@@ -181,43 +181,75 @@ if (isset($_POST['edit_activity'])) {
 
 
 //Chang status
-if (isset($_POST['change-status'])) {
-    $check = $_POST['check'];
-    $slide_id = $_POST['slide_id'];
+// if (isset($_POST['change-status'])) {
+//     $check = $_POST['check'];
+//     $slide_id = $_POST['slide_id'];
 
-    $stmt = $conn->prepare("UPDATE activity SET status = :status WHERE id =  :id");
-    $stmt->bindParam(":status", $check);
-    $stmt->bindParam(":id", $slide_id);
-    $stmt->execute();
+//     $stmt = $conn->prepare("UPDATE activity SET status = :status WHERE id =  :id");
+//     $stmt->bindParam(":status", $check);
+//     $stmt->bindParam(":id", $slide_id);
+//     $stmt->execute();
 
-    if ($stmt) {
+//     if ($stmt) {
+//         echo "<script>
+//         $(document).ready(function() {
+//             Swal.fire({
+//                 text: 'Change Status Success',
+//                 icon: 'success',
+//                 timer: 10000,
+//                 showConfirmButton: false
+//             });
+//         })
+//         </script>";
+//         echo "<meta http-equiv='refresh' content='1.5;url=activity'>";
+//     } else {
+//         echo "<script>alert('Something Went Wrong!!!')</script>";
+//         echo "<meta http-equiv='refresh' content='1.5;url=activity'>";
+//     }
+// }
+
+//delete img blog
+// if (isset($_POST['del-img'])) {
+//     $img_id = $_POST['del-img'];
+
+//     $delete_img = $conn->prepare("DELETE FROM activity_img WHERE id = :id");
+//     $delete_img->bindParam(":id", $img_id);
+//     $delete_img->execute();
+
+//     if ($delete_img) {
+//         echo "<meta http-equiv='refresh' content='1.5;url=activity'>";
+//     }
+
+
+if (isset($_POST['delete'])) {
+    $id = $_POST['delete'];
+    $del_activity = $conn->prepare("DELETE FROM activity WHERE id = :id");
+    $del_activity->bindParam(":id", $id);
+    $del_activity->execute();
+
+    if ($del_activity) {
         echo "<script>
         $(document).ready(function() {
             Swal.fire({
-                text: 'Change Status Success',
+                text: 'Delete Activity has been completed.',
                 icon: 'success',
                 timer: 10000,
                 showConfirmButton: false
             });
         })
         </script>";
-        echo "<meta http-equiv='refresh' content='1.5;url=activity'>";
+        echo "<meta http-equiv='refresh' content='2;url=activity'>";
     } else {
-        echo "<script>alert('Something Went Wrong!!!')</script>";
-        echo "<meta http-equiv='refresh' content='1.5;url=activity'>";
-    }
-}
-
-//delete img blog
-if (isset($_POST['del-img'])) {
-    $img_id = $_POST['del-img'];
-
-    $delete_img = $conn->prepare("DELETE FROM activity_img WHERE id = :id");
-    $delete_img->bindParam(":id", $img_id);
-    $delete_img->execute();
-
-    if ($delete_img) {
-        echo "<meta http-equiv='refresh' content='1.5;url=activity'>";
+        echo "<script>
+        $(document).ready(function() {
+            Swal.fire({
+                text: 'Something Went Wrong!!!',
+                icon: 'error',
+                timer: 10000,
+                showConfirmButton: false
+            });
+        })
+        </script>";
     }
 }
 
@@ -392,24 +424,24 @@ $row_activity = $stmt->fetchAll();
                                     <table class="table">
                                         <thead>
                                             <tr align="center">
-                                                <th scope="col" width="20%">Image</th>
-                                                <th scope="col" width="60%">Topic</th>
-                                                <th scope="col" width="10%">Status</th>
-                                                <th scope="col" width="10%">Manage</th>
+                                                <th scope="col" width="30%">Image</th>
+                                                <th scope="col" width="40%">Topic</th>
+                                                <!-- <th scope="col" width="10%">Status</th> -->
+                                                <th scope="col" width="20%">Manage</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             foreach ($row_activity as $row_activity) { ?>
                                                 <tr align="center">
-                                                    <td><img width="100%" src="upload/upload_activity/<?php echo $row_activity['cover_img'] ?>" alt=""></td>
-                                                    <td><?php echo $row_activity['topic'] ?></td>
-                                                    <td><a type="input" data-bs-toggle="modal" href="#status<?php echo $row_activity['id'] ?>" class="btn btn-gear" <?php if ($row_activity['status'] == "on") {
+                                                    <td><img width="50%" src="upload/upload_activity/<?php echo $row_activity['cover_img'] ?>" alt=""></td>
+                                                    <td align="left"><?php echo $row_activity['topic'] ?></td>
+                                                    <!-- <td><a type="input" data-bs-toggle="modal" href="#status<?php echo $row_activity['id'] ?>" class="btn btn-gear" <?php if ($row_activity['status'] == "on") {
                                                                                                                                                                         echo " style='background-color: #06c258; color:#FFF;'";
                                                                                                                                                                     } else {
                                                                                                                                                                         echo " style='background-color: #c3412c; color:#FFF;'";
-                                                                                                                                                                    } ?>><i class="bi bi-gear"></i></a></td>
-                                                    <td>
+                                                                                                                                                                    } ?>><i class="bi bi-gear"></i></a></td>-->
+                                                    <td> 
                                                         <form method="post">
                                                             <a type="input" data-bs-toggle="modal" href="#editactivity<?php echo $row_activity['id'] ?>" class="btn " style="background-color:#ffc107; color: #FFFFFF;"><i class="bi bi-pencil-square"></i></a>
                                                             <button type="submit" class="btn" value="<?php echo $row_activity['id']; ?>" onclick="return confirm('You want to delete this blog?');" name="delete" style="background-color:#c3412c; color: #FFFFFF;"><i class="bi bi-trash"></i></button>
@@ -500,7 +532,7 @@ $row_activity = $stmt->fetchAll();
                                                 </div>
 
                                                 <!-- Modal Status -->
-                                                <div class="modal fade" id="status<?php echo $row_activity['id'] ?>" data-bs-backdrop="static" aria-hidden="true">
+                                                <!-- <div class="modal fade" id="status<?php echo $row_activity['id'] ?>" data-bs-backdrop="static" aria-hidden="true">
                                                     <div class="modal-dialog  modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -530,7 +562,7 @@ $row_activity = $stmt->fetchAll();
 
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             <?php   }
                                             ?>
 

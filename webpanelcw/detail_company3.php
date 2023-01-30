@@ -127,9 +127,12 @@ $row_company3 = $stmt->fetch(PDO::FETCH_ASSOC);
             <section class="section">
                 <form method="post" enctype="multipart/form-data">
                     <div class="card">
-                        <div class="card-header">
+                    <div class="card-header" style="display: flex ;justify-content: flex-end;">
                             <h4 class="card-title"></h4>
+                            <div class="a">
+                            <a href="detail_company3_en"><button type="button" class="btn btn-edit">EN</button></a>
                             <button type="submit" name="edit-company" class="btn btn-save">Save</button>
+                            </div>
                         </div>
                         <div class="card-body">
                             <h5>Content</h5>

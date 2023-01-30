@@ -1,5 +1,34 @@
+<?php
+require_once('webpanelcw/config/mpj_db.php');
+error_reporting(0);
+if (!isset($_SESSION)) {
+  session_start();
+}
+
+
+if (isset($_GET['lang'])) {
+  $lang = $_GET['lang'];
+  if ($lang == "en") {
+    $stmt = $conn->prepare("SELECT * FROM company2_en");
+    $stmt->execute();
+    $row_company2 = $stmt->fetch(PDO::FETCH_ASSOC);
+  } else {
+    $stmt = $conn->prepare("SELECT * FROM company2");
+    $stmt->execute();
+    $row_company2 = $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+} else {
+  $stmt = $conn->prepare("SELECT * FROM company2");
+  $stmt->execute();
+  $row_company2 = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="desktop">
+
 <head>
 
   <link rel="shortcut icon" href="images/favicon.ico">
@@ -18,86 +47,90 @@
   <link href="css/spinner.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
 
-  
+
   <script src="js/core.min.js"></script>
   <script src="js/script.min.js"></script>
 
   <script src="js/jquery.min.js"></script>
 
   <script type="text/javascript">
-
-    'use strict'; 
-    var $window = $(window); 
+    'use strict';
+    var $window = $(window);
     $window.on({
-      'load': function () {
+      'load': function() {
 
-        /* Preloader */ 
+        /* Preloader */
         $('.spinner').fadeOut(2500);
       },
-      
-    });
 
+    });
   </script>
 
-  
+
 </head>
 
 <body>
- <!-- Pre loader -->
- <div class="spinner" id="loading-body">
-  <div> 
-    <div class="bounce1"></div>
-    <div class="bounce2"></div>
-    <div class="bounce3"></div>
+  <!-- Pre loader -->
+  <div class="spinner" id="loading-body">
+    <div>
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
   </div>
-</div>
 
-<?php include("header.php");?>
+  <?php include("header.php"); ?>
 
-<main>
-
-
- <img class="img-fluid w-100" src="upload/bg01.jpg">
+  <main>
 
 
- <?php include("navigator.php");?>
+    <img class="img-fluid w-100" src="upload/bg01.jpg">
 
 
- <section id="page-section">
-  <div class="container-xxl">
-    <div class="text-center mb-5">
-     <h2>บริษัท เอ็ม พี เจ ดีสทริบิวชั่น เซ็นเตอร์ จำกัด (สำนักงานใหญ่)(ธุรกิจลานตู้)</h2>
-   </div>
+    <?php include("navigator.php"); ?>
 
 
-
-    <p>
-      กลุ่มบริษัท MPJ GROUP ประกอบธุรกิจบริการจัดการโลจิสติกส์ ทั้งด้านการจัดส่งสินค้า และการบริการด้านการบริหาร การจัดเก็บตู้คอนเทนเนอร์แบบครบวงจร สำหรับการบรรจุสินค้าภายในประเทศ เพื่อการนำเข้า-ส่งออกสินค้า รวมถึงการให้บริการเกี่ยวกับซอฟต์แวร์สำเร็จรูปแบบครบวงจรและครอบคลุมทุกประเภทธุรกิจ พร้อมทั้งมีบริการหลังการขาย
-</p>
-
-<p>
-เราได้เปิดดำเนินการเป็นระยะเวลามากกว่า 12 ปี โดยเรามุ่งมั่นที่จะเป็น “ผู้ให้บริการท้องถิ่นชั้นนำภายในประเทศ ด้านการจัดการโลจิสติกส์ ด้วยความเข้าใจถึงความต้องการในท้องถิ่นภายในประเทศ เราจะส่งมอบบริการที่ตรงความต้องการของลูกค้าในระดับมาตราฐานสากล เพื่อความสำเร็จของลูกค้า”
-</p>
-
-
-<div class="text-center">
-<img class="img-fluid" src="upload/container02.jpg">
-</div>
+    <section id="page-section">
+      <div class="container-xxl">
+        <div class="text-center mb-5">
+          <h2><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'MPJ Distribution Center Co., Ltd. (Head Office) (Landu business)';
+                } else {
+                  echo 'บริษัท เอ็ม พี เจ ดีสทริบิวชั่น เซ็นเตอร์ จำกัด (สำนักงานใหญ่)(ธุรกิจลานตู้)';
+                }
+              } else {
+                echo "บริษัท เอ็ม พี เจ ดีสทริบิวชั่น เซ็นเตอร์ จำกัด (สำนักงานใหญ่)(ธุรกิจลานตู้)";
+              } ?></h2>
+        </div>
 
 
 
-</div>
-</section>
+        <p>
+          <?php echo $row_company2['content']; ?>
+        </p>
+
+
+
+        <div class="text-center">
+          <img class="img-fluid" src="webpanelcw/upload/upload_company2/<?php echo $row_company2['img']; ?>">
+        </div>
+
+
+
+      </div>
+    </section>
 
 
 
 
-</main>
+  </main>
 
-<?php include("footer.php");?>
+  <?php include("footer.php"); ?>
 
 
 
 
 </body>
+
 </html>

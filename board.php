@@ -1,3 +1,32 @@
+<?php
+require_once('webpanelcw/config/mpj_db.php');
+error_reporting(0);
+if (!isset($_SESSION)) {
+  session_start();
+}
+
+
+if (isset($_GET['lang'])) {
+  $lang = $_GET['lang'];
+  if ($lang == "en") {
+    $stmt = $conn->prepare("SELECT * FROM board_en");
+    $stmt->execute();
+    $row_board = $stmt->fetch(PDO::FETCH_ASSOC);
+  } else {
+    $stmt = $conn->prepare("SELECT * FROM board");
+    $stmt->execute();
+    $row_board = $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+} else {
+  $stmt = $conn->prepare("SELECT * FROM board");
+  $stmt->execute();
+  $row_board = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" class="desktop">
 <head>
@@ -66,13 +95,21 @@
  <section id="page-section">
   <div class="container-xxl">
     <div class="text-center mb-5">
-     <h2>คณะกรรมการบริษัทและผู้บริหาร</h2>
+     <h2><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Board of Directors and Executives';
+                } else {
+                  echo 'คณะกรรมการบริษัทและผู้บริหาร';
+                }
+              } else {
+                echo "คณะกรรมการบริษัทและผู้บริหาร";
+              } ?></h2>
     </div>
 
 
+    <?php echo $row_board['content'];?>
 
-
-<img class="img-fluid" src="upload/board.jpg">
+<img class="img-fluid" src="webpanelcw/upload/upload_board/<?php echo $row_board['img'];?>">
 
 
  

@@ -1,3 +1,31 @@
+<?php
+require_once('webpanelcw/config/mpj_db.php');
+error_reporting(0);
+if (!isset($_SESSION)) {
+  session_start();
+}
+
+
+if (isset($_GET['lang'])) {
+  $lang = $_GET['lang'];
+  if ($lang == "en") {
+    $stmt = $conn->prepare("SELECT * FROM publication_en");
+    $stmt->execute();
+    $row_publication = $stmt->fetchAll();
+  } else {
+    $stmt = $conn->prepare("SELECT * FROM publication");
+    $stmt->execute();
+    $row_publication = $stmt->fetchAll();
+  }
+} else {
+  $stmt = $conn->prepare("SELECT * FROM publication");
+  $stmt->execute();
+  $row_publication = $stmt->fetchAll();
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="desktop">
 <head>
@@ -68,7 +96,15 @@
 
 
     <div class="text-center mb-5">
-     <h2>เอกสารเผยแพร่ (หนังสือชี้ชวน)</h2>
+     <h2><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Publication (Prospectus)';
+                } else {
+                  echo 'เอกสารเผยแพร่ (หนังสือชี้ชวน)';
+                }
+              } else {
+                echo "เอกสารเผยแพร่ (หนังสือชี้ชวน)";
+              } ?></h2>
    </div>
 
 
@@ -82,7 +118,7 @@
 
 
 
-<?php for($i=1;$i<=10;$i++){ ?> 
+<?php for($i=0;$i<count($row_publication);$i++){ ?> 
 
     <div class="col-lg-6">
 
@@ -91,12 +127,20 @@
       <div class="border p-3 mb-4">
         <div class="row align-items-center">
           <div class="col-md-4">
-          <img class="img-fluid" src="upload/book01.jpg">
+          <img class="img-fluid" src="webpanelcw/upload/upload_publication/<?php echo $row_publication[$i]['img'];?>">
           </div>
           <div class="col-md-8">
-            <h4>รายงานประจำปี 2563</h4>
-            <p class="text-secondary">แบบฟอร์ม 56-1 ประจำปี 2563</p>
-            <a href="upload/pdf.pdf" class="btn btn-warning rounded-0" target="_blank"><span class="material-icons-sharp">vertical_align_bottom</span> ดาวน์โหลด</a>
+            
+            <p class="text-secondary"><?php echo $row_publication[$i]['content']; ?></p>
+            <a href="<?php echo $row_publication[$i]['link_pdf']; ?>" class="btn btn-warning rounded-0" target="_blank"><span class="material-icons-sharp">vertical_align_bottom</span><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Download';
+                } else {
+                  echo 'ดาวน์โหลด';
+                }
+              } else {
+                echo "ดาวน์โหลด";
+              } ?> </a>
           </div>
         </div>
       </div>

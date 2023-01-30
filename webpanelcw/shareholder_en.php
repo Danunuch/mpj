@@ -87,6 +87,40 @@ if (isset($_POST['save_text'])) {
     }
 }
 
+
+
+// delete shareholder
+if (isset($_POST['delete_share'])) {
+    $id = $_POST['delete_share'];
+    $del_share = $conn->prepare("DELETE FROM shareholder_en WHERE id = :id");
+    $del_share->bindParam(":id", $id);
+    $del_share->execute();
+
+    if ($del_share) {
+        echo "<script>
+        $(document).ready(function() {
+            Swal.fire({
+                text: 'Delete Shareholder has been completed.',
+                icon: 'success',
+                timer: 10000,
+                showConfirmButton: false
+            });
+        })
+        </script>";
+        echo "<meta http-equiv='refresh' content='2;url=shareholder_en'>";
+    } else {
+        echo "<script>
+        $(document).ready(function() {
+            Swal.fire({
+                text: 'Something Went Wrong!!!',
+                icon: 'error',
+                timer: 10000,
+                showConfirmButton: false
+            });
+        })
+        </script>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,7 +160,9 @@ if (isset($_POST['save_text'])) {
                     <div class="card-header">
                         <h4 class="card-title">Shareholder</h4>
                         <div class="box-lang">
-                            <a href="shareholder"><button type="button" class="btn btn-edit">TH</button></a>
+                            <form method="post">
+                                <a href="shareholder"><button type="button" class="btn btn-edit">TH</button></a>
+                                <button type="submit" name="save_text" class="btn btn-save">Save</button>
                         </div>
                     </div>
 
@@ -134,80 +170,82 @@ if (isset($_POST['save_text'])) {
                     <div class="card-body" style="display: flex;">
                         <div class="box-slide-text">
                             <div class="content-text">
-                                <form method="post">
-                                    <button type="submit" name="save_text" class="btn btn-save">Save</button>
-                                    <textarea name="content"><?php echo $row_sha_content['content'] ?></textarea>
-                                    <script>
-                                        tinymce.init({
-                                            selector: 'textarea',
-                                            branding: false,
-                                            height: "300",
-                                            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                                            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                                            tinycomments_mode: 'embedded',
-                                            tinycomments_author: 'Author name',
-                                            mergetags_list: [{
-                                                    value: 'First.Name',
-                                                    title: 'First Name'
-                                                },
-                                                {
-                                                    value: 'Email',
-                                                    title: 'Email'
-                                                },
-                                            ]
-                                        });
-                                    </script>
+
+
+                                <textarea name="content"><?php echo $row_sha_content['content'] ?></textarea>
+                                <script>
+                                    tinymce.init({
+                                        selector: 'textarea',
+                                        branding: false,
+                                        height: "300",
+                                        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                                        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                                        tinycomments_mode: 'embedded',
+                                        tinycomments_author: 'Author name',
+                                        mergetags_list: [{
+                                                value: 'First.Name',
+                                                title: 'First Name'
+                                            },
+                                            {
+                                                value: 'Email',
+                                                title: 'Email'
+                                            },
+                                        ]
+                                    });
+                                </script>
                                 </form>
 
                                 <br>
-                                <div class="box-lang" style="display: flex;">
-                                    <a href="shareholder_add"><button type="button" class="btn btn-edit1">Add</button></a>
-                                </div>
-                                <div class="card-body" style="display: flex;">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead align="center">
-                                                <tr>
-
-                                                    <th scope="col">Company Name</th>
-                                                    <th scope="col">Quantity</th>
-                                                    <th scope="col">Percentage</th>
-                                                    <th scope="col">Manage</th>
-                                                </tr>
-                                            </thead>
-
-
-                                            <?php
-                                            for ($i = 0; $i < count($row_shareholder); $i++) {
-
-                                                $stmt = $conn->prepare("SELECT * FROM shareholder_en ORDER BY id DESC");
-                                                $stmt->execute();
-                                                $row_shareholder = $stmt->fetchAll(); ?>
-
-
-                                                <tbody>
-                                                    <tr>
-                                                        <td align="center"><?php echo $row_shareholder[$i]['company_name']; ?></td>
-                                                        <td align="center"><?php echo $row_shareholder[$i]['qty']; ?></td>
-                                                        <td align="center"><?php echo $row_shareholder[$i]['percen']; ?></td>
-                                                        <td align="center">
-                                                            <div class="manage">
-                                                                <a href="shareholder_edit_en?shareholder_id=<?php echo $row_shareholder[$i]['id']; ?>"><button type="button" class="btn" style="background-color:#ffc107; color: #FFFFFF; margin:3px;"><i class="bi bi-pencil-square"></i></button></a>
-                                                                <button class="btn" onclick="return confirm('Do you want to delete?');" name="delete_sha" style="background-color:#ff4122; color: #FFFFFF;"><i class="bi bi-trash"></i></button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-
-                                            <?php }
-                                            ?>
-
-                                        </table>
+                                <form method="post">
+                                    <div class="flex-end">
+                                        <a href="shareholder_add"><button type="button" class="btn btn-edit">Add</button></a>
                                     </div>
-                                </div>
+                                    <div class="card-body" style="display: flex;">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead align="center">
+                                                    <tr>
 
+                                                        <th scope="col">Company Name</th>
+                                                        <th scope="col">Quantity</th>
+                                                        <th scope="col">Percentage</th>
+                                                        <th scope="col">Manage</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <?php
+                                                for ($i = 0; $i < count($row_shareholder); $i++) {
+
+                                                    $stmt = $conn->prepare("SELECT * FROM shareholder_en ORDER BY id DESC");
+                                                    $stmt->execute();
+                                                    $row_shareholder = $stmt->fetchAll(); ?>
+
+
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="center"><?php echo $row_shareholder[$i]['company_name']; ?></td>
+                                                            <td align="center"><?php echo $row_shareholder[$i]['qty']; ?></td>
+                                                            <td align="center"><?php echo $row_shareholder[$i]['percen']; ?></td>
+                                                            <td align="center">
+                                                                <div class="manage">
+                                                                    <a href="shareholder_edit_en?shareholder_id=<?php echo $row_shareholder[$i]['id']; ?>"><button type="button" class="btn" style="background-color:#ffc107; color: #FFFFFF; margin:3px;"><i class="bi bi-pencil-square"></i></button></a>
+                                                                    <button type="submit" class="btn" onclick="return confirm('ต้องการลบใช่หรือไม่?')" name="delete_share" value="<?php echo $row_shareholder[$i]['id']; ?>" style="background-color:red; color: #FFFFFF;"><i class="bi bi-trash3"></i></button>
+                                                                </div>
+                                        </div>
+                                        </td>
+                                        </tr>
+                                        </tbody>
+
+                                    <?php }
+                                    ?>
+
+                                    </table>
+                                    </div>
                             </div>
 
+                        </div>
+                        </form>
 
             </section>
             <?php include('footer.php'); ?>

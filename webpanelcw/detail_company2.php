@@ -127,9 +127,12 @@ $row_company2 = $stmt->fetch(PDO::FETCH_ASSOC);
             <section class="section">
                 <form method="post" enctype="multipart/form-data">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header" style="display: flex ;justify-content: flex-end;">
                             <h4 class="card-title"></h4>
-                            <button type="submit" name="edit-company" class="btn btn-save">Save</button>
+                            <div class="a">
+                                <a href="detail_company2_en"><button type="button" class="btn btn-edit">EN</button></a>
+                                <button type="submit" name="edit-company" class="btn btn-save">Save</button>
+                            </div>
                         </div>
                         <div class="card-body">
                             <h5>Content</h5>
@@ -165,8 +168,9 @@ $row_company2 = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <span style="color: #ff4122;">Only file are support ('jpg', 'jpeg', 'png', 'webp').</span>
                                 <div class="preview-img">
                                     <div class="d-flex justify-content-center align-items-center">
-                                    <img id="previewImg" width="50%" src="upload/upload_company2/<?php echo $row_company2['img'] ?>" alt="">
-                                </div></div>
+                                        <img id="previewImg" width="50%" src="upload/upload_company2/<?php echo $row_company2['img'] ?>" alt="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,3 +1,32 @@
+<?php
+require_once('webpanelcw/config/mpj_db.php');
+error_reporting(0);
+if (!isset($_SESSION)) {
+  session_start();
+}
+
+
+if (isset($_GET['lang'])) {
+  $lang = $_GET['lang'];
+  if ($lang == "en") {
+    $stmt = $conn->prepare("SELECT * FROM news_en");
+    $stmt->execute();
+    $row_news = $stmt->fetchAll();
+  } else {
+    $stmt = $conn->prepare("SELECT * FROM news");
+    $stmt->execute();
+    $row_news = $stmt->fetchAll();
+  }
+} else {
+  $stmt = $conn->prepare("SELECT * FROM news");
+  $stmt->execute();
+  $row_news = $stmt->fetchAll();
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" class="desktop">
 <head>
@@ -68,7 +97,15 @@
 
 
     <div class="text-center mb-5">
-     <h2>ห้องข่าว</h2>
+     <h2><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Newsroom';
+                } else {
+                  echo 'ห้องข่าว';
+                }
+              } else {
+                echo "ห้องข่าว";
+              } ?></h2>
    </div>
 
 
@@ -82,7 +119,7 @@
 
 
 
-<?php for($i=1;$i<=10;$i++){ ?> 
+<?php for($i=0;$i<count($row_news);$i++){ ?> 
 
     <div class="col-lg-6">
 
@@ -90,9 +127,17 @@
 
       <div class="border p-3 mb-4">
         
-            <p class="px-3 py-2 bg-dark d-inline-block text-warning">08 ธันวาคม 2565</p>
-            <p class="text-secondary">รายงานความเห็นของที่ปรึกษาทางการเงินอิสระเกี่ยวกับธุรกรรมการรวมกิจการระหว่าง บริษัท เจดับเบิ้ลยูดี อินโฟโลจิสติกส์ จำกัด (มหาชน) และ บริษัท เอสซีจี โลจิสติกส์ แมเนจเม้นท์ จำกัด โดยการแลกหุ้น (แก้ไข)</p>
-            <a href="upload/pdf.pdf" class="btn btn-warning rounded-0" target="_blank"><span class="material-icons-sharp">vertical_align_bottom</span> อ่านเพื่ม</a>
+            <p class="px-3 py-2 bg-dark d-inline-block text-warning"><?php echo $row_news[$i]['date_show']; ?></p>
+            <p class="text-secondary"><?php echo $row_news[$i]['content']; ?></p>
+            <a href="<?php echo $row_news[$i]['link']; ?>" class="btn btn-warning rounded-0" target="_blank"><span class="material-icons-sharp">vertical_align_bottom</span><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Read More';
+                } else {
+                  echo 'อ่านเพื่ม';
+                }
+              } else {
+                echo "อ่านเพื่ม";
+              } ?> </a>
           
       </div>
 

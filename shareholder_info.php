@@ -1,3 +1,50 @@
+<?php
+require_once('webpanelcw/config/mpj_db.php');
+error_reporting(0);
+if (!isset($_SESSION)) {
+  session_start();
+}
+
+
+if (isset($_GET['lang'])) {
+  $lang = $_GET['lang'];
+  if ($lang == "en") {
+    $stmt = $conn->prepare("SELECT * FROM shareholder_en");
+    $stmt->execute();
+    $row_shareholder = $stmt->fetchAll();
+  } else {
+    $stmt = $conn->prepare("SELECT * FROM shareholder");
+    $stmt->execute();
+    $row_shareholder = $stmt->fetchAll();
+  }
+} else {
+  $stmt = $conn->prepare("SELECT * FROM shareholder");
+  $stmt->execute();
+  $row_shareholder = $stmt->fetchAll();
+}
+
+
+if (isset($_GET['lang'])) {
+  $lang = $_GET['lang'];
+  if ($lang == "en") {
+    $stmt = $conn->prepare("SELECT * FROM sha_content_en");
+    $stmt->execute();
+    $row_sha_content = $stmt->fetch(PDO::FETCH_ASSOC);
+  } else {
+    $stmt = $conn->prepare("SELECT * FROM sha_content");
+    $stmt->execute();
+    $row_sha_content = $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+} else {
+  $stmt = $conn->prepare("SELECT * FROM sha_content");
+  $stmt->execute();
+  $row_sha_content = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" class="desktop">
 <head>
@@ -68,12 +115,20 @@
 
 
     <div class="text-center mb-5">
-     <h2>ข้อมูลผู้ถือหุ้น</h2>
+     <h2><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Shareholder Information';
+                } else {
+                  echo 'ข้อมูลผู้ถือหุ้น';
+                }
+              } else {
+                echo "ข้อมูลผู้ถือหุ้น";
+              } ?></h2>
    </div>
 
 
-   <h4>โครงสร้างการถือหุ้น</h4>
-   <p>รายชื่อผู้ถือหุ้นรายใหญ่ 10 อันดับแรก ที่ปรากฏในสมุดทะเบียนผู้ถือหุ้น ณ วันที่ 31  ธันวาคม  2563 มีดังนี้</p>
+   
+   <p><?php echo $row_sha_content['content']; ?></p>
 
 
 
@@ -82,20 +137,52 @@
    <table class="table-res mb-4 restables-origin">
     <thead >
       <tr>
-        <th width="10%">ลำดับ</th>
-        <th width="50%">ชื่อ</th>
-        <th width="20">จำนวน</th>
-        <th width="20">ร้อยละ</th>
+        <th width="10%"><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'No';
+                } else {
+                  echo 'ลำดับ';
+                }
+              } else {
+                echo "ลำดับ";
+              } ?></th>
+        <th width="50%"><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Name';
+                } else {
+                  echo 'ชื่อ';
+                }
+              } else {
+                echo "ชื่อ";
+              } ?></th>
+        <th width="20"><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Quantity';
+                } else {
+                  echo 'จำนวน';
+                }
+              } else {
+                echo "จำนวน";
+              } ?></th>
+        <th width="20"><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Percentage';
+                } else {
+                  echo 'ร้อยละ';
+                }
+              } else {
+                echo "ร้อยละ";
+              } ?></th>
       </tr>
     </thead>
     <tbody>
 
-<?php for($i=1;$i<=10;$i++){ ?> 
+<?php for($i=0;$i<count($row_shareholder);$i++){ ?> 
       <tr>
-        <td  data-label="ลำดับ"><?=$i?></td>
-        <td class="text-lg-start" data-label="ชื่อ">บริษัท เอเอเอบิบิบิ จำกัด</td>
-        <td class="text-lg-start" data-label="จำนวน">20,683,125</td>
-        <td class="text-lg-start" data-label="ร้อยละ">2.73</td>
+        <td  data-label="ลำดับ"><?=$i+1?></td>
+        <td class="text-lg-start" data-label="ชื่อ"><?php echo $row_shareholder[$i]['company_name']; ?></td>
+        <td class="text-lg-start" data-label="จำนวน"><?php echo $row_shareholder[$i]['qty']; ?></td>
+        <td class="text-lg-start" data-label="ร้อยละ"><?php echo $row_shareholder[$i]['percen']; ?></td>
       </tr>
  <?php } ?>
     </tbody>

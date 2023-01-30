@@ -1,3 +1,36 @@
+<?php
+require_once('webpanelcw/config/mpj_db.php');
+error_reporting(0);
+if (!isset($_SESSION)) {
+  session_start();
+}
+
+
+if (isset($_GET['lang'])) {
+  $lang = $_GET['lang'];
+  if ($lang == "en") {
+    $stmt = $conn->prepare("SELECT * FROM stock_en");
+    $stmt->execute();
+    $row_stock = $stmt->fetch(PDO::FETCH_ASSOC);
+  } else {
+    $stmt = $conn->prepare("SELECT * FROM stock");
+    $stmt->execute();
+    $row_stock = $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+} else {
+  $stmt = $conn->prepare("SELECT * FROM stock");
+  $stmt->execute();
+  $row_stock = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en" class="desktop">
 <head>
@@ -68,12 +101,20 @@
 
 
     <div class="text-center mb-5">
-     <h2>ข้อมูลราคาหลักทรัพย์</h2>
+     <h2><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Stock Price Information';
+                } else {
+                  echo 'ข้อมูลราคาหลักทรัพย์';
+                }
+              } else {
+                echo "ข้อมูลราคาหลักทรัพย์";
+              } ?></h2>
    </div>
 
 
    <div class="ratio ratio-1x1">
-    <iframe src="https://www.set.or.th/th/market/product/stock/quote/SGC/price"  title="ข้อมูลราคาหลักทรัพย์"></iframe>
+    <iframe src="<?php echo $row_stock['link']; ?>"  title="ข้อมูลราคาหลักทรัพย์"></iframe>
   </div>
 
 </div>

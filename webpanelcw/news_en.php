@@ -15,6 +15,38 @@ $data_news->execute();
 $row_news = $data_news->fetchAll();
 
 
+// delete news
+if (isset($_POST['delete_news'])) {
+    $id = $_POST['delete_news'];
+    $del_news = $conn->prepare("DELETE FROM news_en WHERE id = :id");
+    $del_news->bindParam(":id", $id);
+    $del_news->execute();
+
+    if ($del_news) {
+        echo "<script>
+        $(document).ready(function() {
+            Swal.fire({
+                text: 'Delete News has been completed.',
+                icon: 'success',
+                timer: 10000,
+                showConfirmButton: false
+            });
+        })
+        </script>";
+        echo "<meta http-equiv='refresh' content='2;url=news_en'>";
+    } else {
+        echo "<script>
+        $(document).ready(function() {
+            Swal.fire({
+                text: 'Something Went Wrong!!!',
+                icon: 'error',
+                timer: 10000,
+                showConfirmButton: false
+            });
+        })
+        </script>";
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -85,7 +117,7 @@ $row_news = $data_news->fetchAll();
                                                 <td align="center">
                                                     <div class="manage">
                                                         <a href="news_edit_en?news_id=<?php echo $row_news[$i]['id']; ?>"><button type="button" class="btn" style="background-color:#ffc107; color: #FFFFFF;"><i class="bi bi-pencil-square"></i></button></a>
-                                                        <button class="btn" onclick="return confirm('Do you want to delete?');" name="delete_all" style="background-color:#ff4122; color: #FFFFFF;"><i class="bi bi-trash"></i></button>
+                                                        <button type="submit" class="btn" onclick="return confirm('ต้องการลบใช่หรือไม่?')" name="delete_news" value="<?php echo $row_news[$i]['id']; ?>" style="background-color:red; color: #FFFFFF;"><i class="bi bi-trash3"></i></button>
                                                     </div>
                                                 </td>
                                             </tr>

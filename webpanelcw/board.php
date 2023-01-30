@@ -56,7 +56,7 @@ $row_board = $stmt->fetch(PDO::FETCH_ASSOC);
                             <a href="board_edit"><button type="button" class="btn btn-edit1">Edit</button></a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="container">
                         <?php echo $row_board['content']; ?>
                         <div class="d-flex justify-content-center align-items-center" style="margin: 30px;">
                         <img width="70%" src="upload/upload_board/<?php echo $row_board['img']; ?>" alt="">

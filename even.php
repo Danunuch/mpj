@@ -1,5 +1,38 @@
+<?php
+require_once('webpanelcw/config/mpj_db.php');
+error_reporting(0);
+if (!isset($_SESSION)) {
+  session_start();
+}
+
+
+if (isset($_GET['lang'])) {
+  $lang = $_GET['lang'];
+  if ($lang == "en") {
+    $stmt = $conn->prepare("SELECT * FROM activity_en");
+    $stmt->execute();
+    $row_activity = $stmt->fetchAll();
+  } else {
+    $stmt = $conn->prepare("SELECT * FROM activity");
+    $stmt->execute();
+    $row_activity = $stmt->fetchAll();
+  }
+} else {
+  $stmt = $conn->prepare("SELECT * FROM activity");
+  $stmt->execute();
+  $row_activity = $stmt->fetchAll();
+}
+
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en" class="desktop">
+
 <head>
 
   <link rel="shortcut icon" href="images/favicon.ico">
@@ -18,154 +51,135 @@
   <link href="css/spinner.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
 
-  
+
   <script src="js/core.min.js"></script>
   <script src="js/script.min.js"></script>
 
   <script src="js/jquery.min.js"></script>
 
   <script type="text/javascript">
-
-    'use strict'; 
-    var $window = $(window); 
+    'use strict';
+    var $window = $(window);
     $window.on({
-      'load': function () {
+      'load': function() {
 
-        /* Preloader */ 
+        /* Preloader */
         $('.spinner').fadeOut(2500);
       },
-      
-    });
 
+    });
   </script>
 
-  
+
 </head>
 
 
 
 <body>
- <!-- Pre loader -->
- <div class="spinner" id="loading-body">
-  <div> 
-    <div class="bounce1"></div>
-    <div class="bounce2"></div>
-    <div class="bounce3"></div>
+  <!-- Pre loader -->
+  <div class="spinner" id="loading-body">
+    <div>
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
   </div>
-</div>
 
-<?php include("header.php");?>
+  <?php include("header.php"); ?>
 
-<main>
+  <main>
 
 
- <img class="img-fluid w-100" src="upload/bg01.jpg">
- 
+    <img class="img-fluid w-100" src="upload/bg01.jpg">
 
- <?php include("navigator.php");?>
 
+    <?php include("navigator.php"); ?>
 
 
 
-<!-- 
+
+    <!-- 
  <section id="banner-section" class="bg-parallax" style="background:url(images/banner-section.jpg) no-repeat top center; background-size:cover;">
  </section> -->
 
 
 
- <section id="page-section">
-  <div class="container-xxl">
+    <section id="page-section">
+      <div class="container-xxl">
 
-    <div class="text-center mb-5">
-      <h2 class="mb-5">
-       กิจกรรมเพื่อสังคมและสิ่งแวดล้อม</h2>
-      </div>
-
-         <?php $new_1 = array ( 
-          '1'=>"กลุ่มบริษัท เอ็ม พี เจ ได้เล็งเห็นความสำคัญทางด้านการศึกษาของเยาวชนที่จะเติบโตเป็นผู้ใหญ่",
-
-          '2'=>"กลุ่มบริษัท เอ็ม พี เจ ได้เข้าร่วมจัดงานกิจกรรมวันเด็กแห่งชาติประจำปี 2563",
-
-          '3'=>"กลุ่มบริษัท เอ็ม พี เจ ได้ส่งเสริมและจัดกิจกรรมให้ความรู้เรื่องยาเสพติด",
-
-          '4'=>"กลุ่มบริษัท เอ็ม พี เจ ร่วมจัดกิจกรรม CSR บริจาคทุนการศึกษา");
-          ?>
+        <div class="text-center mb-5">
+          <h2 class="mb-5">
+            <?php if (isset($_GET['lang'])) {
+              if ($_GET['lang'] == "en") {
+                echo 'Social and environmental activities';
+              } else {
+                echo 'กิจกรรมเพื่อสังคมและสิ่งแวดล้อม';
+              }
+            } else {
+              echo "กิจกรรมเพื่อสังคมและสิ่งแวดล้อม";
+            } ?></h2>
+        </div>
 
 
-          <?php $new_2 = array ( 
-            '1'=>"26 มิถุนายน 2561",
-            '2'=>"11 มกราคม 2563",
-            '3'=>"7 มีนาคม 2564",
-            '4'=>"18 มิถุนายน 2565");
-            ?>
 
 
-            <?php $new_3 = array ( 
-              '1'=>"คณะผู้บริหารและพนักงาน กลุ่มบริษัท เอ็ม พี เจ
-              ได้เล็งเห็นความสำคัญทางด้านการศึกษาของเยาวชนที่จะเติบโตเป็นผู้ใหญ่และเป็นกำลัง <br>
-              สำคัญในการพัฒนาศักยภาพของสังคมไทย จึงได้จัดกิจกรรม CSR บริจาคทุนการศึกษา สิ่งของจำเป็นสำหรับเด็ก.....",
+      <?php for ($i = 0; $i < count($row_activity); $i++) { ?>
+          <div class="mb-4">
+            <div class="row align-items-center">
 
-              '2'=>"วันเด็กแห่งชาติ กลุ่มบริษัท เอ็ม พี เจ ได้เข้าร่วมจัดงานกิจกรรมวันเด็กแห่งชาติประจำปี 2563  โดยมอบของขวัญ ของรางวัลให้กับเด็ก ๆ <br>
-              พร้อมกับทำกิจกรรมเล่นเกมแจกของรางวัล และเลี้ยงอาหารกลางวัน ให้แก่ ชุมชนหมู่บ้านโชคนิมิตร
-              และชุมชนหมู่บ้านกลางนา.....",
+              <div class="col-md-6 col-lg-3">
+                <a class="item-new" href="news-detail.php">
+                  <div class="new-img">
+                    <img class="img-fluid w-100" src="webpanelcw/upload/upload_activity/<?php echo $row_activity[$i]['cover_img']; ?>">
+                  </div>
+                </a>
+              </div>
+        
+                <div class="col-md-6 col-lg-9 p-4">
+                  <h4><?php echo $row_activity[$i]['topic']; ?></h4>
+                  <p><?php echo $row_activity[$i]['date']; ?></p>
+                  <p><?php echo $row_activity[$i]['content']; ?></p>
 
-              '3'=>"กลุ่มบริษัท เอ็ม พี เจ ได้ส่งเสริมและจัดกิจกรรมให้ความรู้เรื่องยาเสพติด ให้กับลูกหลานในชุมชน เพื่อสร้างความรู้ความเข้าใจให้เด็กและเยาวชน <br>
-              ได้มีภูมิคุ้มกันด้านป้องกันและห่างไกล ภัยยาเสพติดให้แก่นักเรียนชั้นประถมศึกษาปีที่ 5-6.....",
 
-              '4'=>"ผ่านมา กลุ่มบริษัท เอ็ม พี เจ ร่วมจัดกิจกรรม CSR บริจาคทุนการศึกษา บริจาคเครื่องคอมพิวเตอร์ กระเป๋านักเรียน และอุปกรณ์การศึกษาต่าง ๆ ให้กับโรงเรียนบ้านดอนใหญ่พัฒนา....");
-              ?>
-
-
-              <!-- โรลเล็ก -->
-
-                            <?php for($i=1;$i<=4;$i++){ ?>
-
-<div class="mb-4">
-              <div class="row align-items-center">
-              
-                  <div class="col-md-6 col-lg-3">
-                    <a class="item-new" href="news-detail.php">
-                      <div class="new-img">
-                        <img class="img-fluid w-100" src="upload/new0<?=$i?>.jpg">
-                      </div>
-                    </a>
+                  <div class="">
+                    <a href="news-detail?activity_id=<?php echo $row_activity[$i]['id']; ?>" class=""><?php if (isset($_GET['lang'])) {
+                                                                                                        if ($_GET['lang'] == "en") {
+                                                                                                          echo 'Read More >>';
+                                                                                                        } else {
+                                                                                                          echo 'อ่านทั้งหมด >>';
+                                                                                                        }
+                                                                                                      } else {
+                                                                                                        echo "อ่านทั้งหมด >>";
+                                                                                                      } ?></a>
                   </div>
 
-                  <div class="col-md-6 col-lg-9 p-4">
-                    <h4><?= $new_1[$i] ?></h4>
-                    <p><?= $new_2[$i] ?></p>
-                    <p><?= $new_3[$i] ?></p>
+                  <!--  <span>อ่านทั้งหมด >></span> -->
 
-                    <div class="">
-                      <a href="news-detail.php" class="">อ่านทั้งหมด >></a> 
-                    </div>
-
-                    <!--  <span>อ่านทั้งหมด >></span> -->
-
-                  </div> 
-
-
-
-                
-
-</div>
-              </div>
-  <?php } ?>
- 
-  
-
-        </div>
-      </section>
+                </div>
 
 
 
 
-    </main>
 
-    <?php include("footer.php");?>
+            </div>
+          </div>
+        <?php } ?>
+   
+
+
+      </div>
+    </section>
 
 
 
 
-  </body>
-  </html>
+  </main>
+
+  <?php include("footer.php"); ?>
+
+
+
+
+</body>
+
+</html>

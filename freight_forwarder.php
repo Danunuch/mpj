@@ -1,5 +1,37 @@
+<?php
+require_once('webpanelcw/config/mpj_db.php');
+error_reporting(0);
+if (!isset($_SESSION)) {
+  session_start();
+}
+
+
+if (isset($_GET['lang'])) {
+  $lang = $_GET['lang'];
+  if ($lang == "en") {
+    $stmt = $conn->prepare("SELECT * FROM company3_en");
+    $stmt->execute();
+    $row_company3 = $stmt->fetch(PDO::FETCH_ASSOC);
+  } else {
+    $stmt = $conn->prepare("SELECT * FROM company3");
+    $stmt->execute();
+    $row_company3 = $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+} else {
+  $stmt = $conn->prepare("SELECT * FROM company3");
+  $stmt->execute();
+  $row_company3 = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en" class="desktop">
+
 <head>
 
   <link rel="shortcut icon" href="images/favicon.ico">
@@ -18,56 +50,62 @@
   <link href="css/spinner.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
 
-  
+
   <script src="js/core.min.js"></script>
   <script src="js/script.min.js"></script>
 
   <script src="js/jquery.min.js"></script>
 
   <script type="text/javascript">
-
-    'use strict'; 
-    var $window = $(window); 
+    'use strict';
+    var $window = $(window);
     $window.on({
-      'load': function () {
+      'load': function() {
 
-        /* Preloader */ 
+        /* Preloader */
         $('.spinner').fadeOut(2500);
       },
-      
-    });
 
+    });
   </script>
 
-  
+
 </head>
 
 <body>
- <!-- Pre loader -->
- <div class="spinner" id="loading-body">
-  <div> 
-    <div class="bounce1"></div>
-    <div class="bounce2"></div>
-    <div class="bounce3"></div>
+  <!-- Pre loader -->
+  <div class="spinner" id="loading-body">
+    <div>
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
   </div>
-</div>
 
-<?php include("header.php");?>
+  <?php include("header.php"); ?>
 
-<main>
-
-
- <img class="img-fluid w-100" src="upload/bg01.jpg">
+  <main>
 
 
- <?php include("navigator.php");?>
+    <img class="img-fluid w-100" src="upload/bg01.jpg">
 
 
- <section id="page-section">
-  <div class="container-xxl">
-    <div class="text-center mb-5">
-     <h2>บริษัท เอ็ม พี เจ ดีสทริบิวชั่น เซ็นเตอร์ จำกัด (กรุงเทพฯ)(ธุรกิจ freight forwarder)</h2>
-   </div>
+    <?php include("navigator.php"); ?>
+
+
+    <section id="page-section">
+      <div class="container-xxl">
+        <div class="text-center mb-5">
+          <h2><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'MPJ Distribution Center Co., Ltd. (Bangkok) (freight forwarder business)';
+                } else {
+                  echo 'บริษัท เอ็ม พี เจ ดีสทริบิวชั่น เซ็นเตอร์ จำกัด (กรุงเทพฯ)(ธุรกิจ freight forwarder)';
+                }
+              } else {
+                echo "บริษัท เอ็ม พี เจ ดีสทริบิวชั่น เซ็นเตอร์ จำกัด (กรุงเทพฯ)(ธุรกิจ freight forwarder)";
+              } ?></h2>
+        </div>
 
 
 
@@ -79,66 +117,62 @@
 
 
 
-   <?php $Freight = array ( 
-    '1'=>"Ocean Freight", 
-    '2'=>"Air Freight", 
-    '3'=>"Trucking Solution", 
-    '4'=>"Customs Clearance Service", 
-    '5'=>"Warehouse Services"
-  ); ?>
+        <?php $Freight = array(
+          '1' => "Ocean Freight",
+          '2' => "Air Freight",
+          '3' => "Trucking Solution",
+          '4' => "Customs Clearance Service",
+          '5' => "Warehouse Services"
+        ); ?>
 
-   <?php $Icon_freight = array ( 
-    '1'=>"icofont-ship", 
-    '2'=>"icofont-airplane-alt", 
-    '3'=>"icofont-truck-loaded", 
-    '4'=>"icofont-tasks", 
-    '5'=>"icofont-home"
-  ); ?>
+        <?php $Icon_freight = array(
+          '1' => "icofont-ship",
+          '2' => "icofont-airplane-alt",
+          '3' => "icofont-truck-loaded",
+          '4' => "icofont-tasks",
+          '5' => "icofont-home"
+        ); ?>
 
-  <div class="row">
+        <div class="row">
 
-    <?php for($i=1;$i<=5;$i++){ ?> 
-      <div class="col-6 col-lg text-center">
-
-
-        <i class="<?= $Icon_freight[$i] ?> h1 text-warning"></i>
+          <?php for ($i = 1; $i <= 5; $i++) { ?>
+            <div class="col-6 col-lg text-center">
 
 
-        <p class="mt-4"><b class="text-dark"><?= $Freight[$i] ?></b></p>
+              <i class="<?= $Icon_freight[$i] ?> h1 text-warning"></i>
+
+
+              <p class="mt-4"><b class="text-dark"><?= $Freight[$i] ?></b></p>
+            </div>
+          <?php } ?>
+
+        </div>
+
+        <br>
+        <div class="text-center mb-4">
+          <img class="img-fluid mb-5" src="webpanelcw/upload/upload_company3/<?php echo $row_company3['img']; ?>">
+        </div>
+
+
+        <p>
+          <?php echo $row_company3['content']; ?>
+        </p>
+
+
+
       </div>
-    <?php } ?>
-
-  </div>
-
-
-  <br>
-  <img class="img-fluid mb-5" src="upload/s03.jpg">
-  <br>
-
-
-  <p>
-    กลุ่มบริษัท MPJ GROUP ประกอบธุรกิจบริการจัดการโลจิสติกส์ ทั้งด้านการจัดส่งสินค้า และการบริการด้านการบริหาร การจัดเก็บตู้คอนเทนเนอร์แบบครบวงจร สำหรับการบรรจุสินค้าภายในประเทศ เพื่อการนำเข้า-ส่งออกสินค้า รวมถึงการให้บริการเกี่ยวกับซอฟต์แวร์สำเร็จรูปแบบครบวงจรและครอบคลุมทุกประเภทธุรกิจ พร้อมทั้งมีบริการหลังการขาย
-  </p>
-
-  <p>
-    เราได้เปิดดำเนินการเป็นระยะเวลามากกว่า 12 ปี โดยเรามุ่งมั่นที่จะเป็น “ผู้ให้บริการท้องถิ่นชั้นนำภายในประเทศ ด้านการจัดการโลจิสติกส์ ด้วยความเข้าใจถึงความต้องการในท้องถิ่นภายในประเทศ เราจะส่งมอบบริการที่ตรงความต้องการของลูกค้าในระดับมาตราฐานสากล เพื่อความสำเร็จของลูกค้า”
-  </p>
+    </section>
 
 
 
 
-</div>
-</section>
+  </main>
 
-
-
-
-</main>
-
-<?php include("footer.php");?>
+  <?php include("footer.php"); ?>
 
 
 
 
 </body>
+
 </html>

@@ -15,26 +15,38 @@ $data_publi->execute();
 $row_publi = $data_publi->fetchAll();
 
 
-if (isset($_POST['delete_all'])) {
-    if (count((array)$_POST['ids']) > 0) {
-        $all = implode(",", $_POST['ids']);
-        $del_publi = $conn->prepare("DELETE FROM publication_en WHERE id in ($all)");
-        $del_publi->execute();
 
+
+// delete plubic
+if (isset($_POST['delete_plubi'])) {
+    $id = $_POST['delete_plubi'];
+    $del_plubi = $conn->prepare("DELETE FROM publication_en WHERE id = :id");
+    $del_plubi->bindParam(":id", $id);
+    $del_plubi->execute();
+
+    if ($del_plubi) {
         echo "<script>
-            $(document).ready(function() {
-                Swal.fire({
-                    text: 'Delete Publication Success',
-                    icon: 'success',
-                    timer: 10000,
-                    showConfirmButton: false
-                });
-            })
-            </script>";
+        $(document).ready(function() {
+            Swal.fire({
+                text: 'Delete Type has been completed.',
+                icon: 'success',
+                timer: 10000,
+                showConfirmButton: false
+            });
+        })
+        </script>";
         echo "<meta http-equiv='refresh' content='2;url=publication_en'>";
     } else {
-        echo "<script>alert('Something Went Wrong!!!')</script>";
-        echo "<meta http-equiv='refresh' content='2;url=publication_en'>";
+        echo "<script>
+        $(document).ready(function() {
+            Swal.fire({
+                text: 'Something Went Wrong!!!',
+                icon: 'error',
+                timer: 10000,
+                showConfirmButton: false
+            });
+        })
+        </script>";
     }
 }
 
@@ -111,7 +123,7 @@ if (isset($_POST['delete_all'])) {
                                                 <td align="center">
                                                     <div class="manage">
                                                         <a href="publication_edit_en?publication_id=<?php echo $row_publi[$i]['id']; ?>"><button type="button" class="btn" style="background-color:#ffc107; color: #FFFFFF;"><i class="bi bi-pencil-square"></i></button></a>
-                                                        <button class="btn" onclick="return confirm('Do you want to delete?');" name="delete_all" style="background-color:#ff4122; color: #FFFFFF;"><i class="bi bi-trash"></i></button>
+                                                        <button type="submit" class="btn" onclick="return confirm('ต้องการลบใช่หรือไม่?')" name="delete_plubi" value="<?php echo $row_publi[$i]['id']; ?>" style="background-color:red; color: #FFFFFF;"><i class="bi bi-trash3"></i></button>
                                                     </div>
                                                 </td>
                                             </tr>

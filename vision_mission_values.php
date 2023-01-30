@@ -1,3 +1,33 @@
+<?php
+require_once('webpanelcw/config/mpj_db.php');
+error_reporting(0);
+if (!isset($_SESSION)) {
+  session_start();
+}
+
+
+if (isset($_GET['lang'])) {
+  $lang = $_GET['lang'];
+  if ($lang == "en") {
+    $stmt = $conn->prepare("SELECT * FROM vision_en");
+    $stmt->execute();
+    $row_vision = $stmt->fetch(PDO::FETCH_ASSOC);
+  } else {
+    $stmt = $conn->prepare("SELECT * FROM vision");
+    $stmt->execute();
+    $row_vision = $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+} else {
+  $stmt = $conn->prepare("SELECT * FROM vision");
+  $stmt->execute();
+  $row_vision = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en" class="desktop">
 <head>
@@ -66,51 +96,21 @@
  <section id="page-section">
   <div class="container-xxl">
     <div class="text-center mb-5">
-      <h2>วิสัยทัศน์ พันธกิจ และค่านิยม</h2>
+      <h2><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Vision Mission Values';
+                } else {
+                  echo 'วิสัยทัศน์ พันธกิจ และค่านิยม';
+                }
+              } else {
+                echo "วิสัยทัศน์ พันธกิจ และค่านิยม";
+              } ?></h2>
     </div>
 
 
-    <h4>วิสัยทัศน์</h4>
-
-
-
       <p>
-        MPJ Group has been established since 2008 to be a one stop Logistics Service Provider. We provide container maintenance & repair services along with container transportation business which has been growing continuously  since established.
-        In terms of depot business, we increase our work efficiency by  adding up new equipment and technologies to support customer’s requirements in order to achieve their satisfaction with qualified services.
-        With trust from customers, we have become one of the fastest growing depot and 
+      <?php echo $row_vision['content']; ?>
       </p>
-
-
-
-
- 
-    <h4>พันธกิจ</h4>
-
-
-
-      <p>
-        MPJ Group has been established since 2008 to be a one stop Logistics Service Provider. We provide container maintenance & repair services along with container transportation business which has been growing continuously  since established.
-        In terms of depot business, we increase our work efficiency by  adding up new equipment and technologies to support customer’s requirements in order to achieve their satisfaction with qualified services.
-        With trust from customers, we have become one of the fastest growing depot and 
-      </p>
-
-
-    <h4>ค่านิยม</h4>
-
-
-
-      <p>
-        MPJ Group has been established since 2008 to be a one stop Logistics Service Provider. We provide container maintenance & repair services along with container transportation business which has been growing continuously  since established.
-        In terms of depot business, we increase our work efficiency by  adding up new equipment and technologies to support customer’s requirements in order to achieve their satisfaction with qualified services.
-        With trust from customers, we have become one of the fastest growing depot and 
-      </p>
-
-
-
-
- 
-
-
 
 </div>
 </section>

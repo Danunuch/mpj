@@ -1,3 +1,32 @@
+<?php
+require_once('webpanelcw/config/mpj_db.php');
+error_reporting(0);
+if (!isset($_SESSION)) {
+  session_start();
+}
+
+
+if (isset($_GET['lang'])) {
+  $lang = $_GET['lang'];
+  if ($lang == "en") {
+    $stmt = $conn->prepare("SELECT * FROM structure_en");
+    $stmt->execute();
+    $row_structure = $stmt->fetch(PDO::FETCH_ASSOC);
+  } else {
+    $stmt = $conn->prepare("SELECT * FROM structure");
+    $stmt->execute();
+    $row_structure = $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+} else {
+  $stmt = $conn->prepare("SELECT * FROM structure");
+  $stmt->execute();
+  $row_structure = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" class="desktop">
 <head>
@@ -66,13 +95,21 @@
  <section id="page-section">
   <div class="container-xxl">
     <div class="text-center mb-5">
-      <h2>โครงสร้างการบริหารงาน</h2>
+      <h2><?php if (isset($_GET['lang'])) {
+                if ($_GET['lang'] == "en") {
+                  echo 'Management Structure';
+                } else {
+                  echo 'โครงสร้างการบริหารงาน';
+                }
+              } else {
+                echo "โครงสร้างการบริหารงาน";
+              } ?></h2>
     </div>
 
 
+    <?php echo $row_structure['content'];?>
 
-
-<img class="img-fluid" src="upload/structure.jpg">
+<img class="img-fluid" src="webpanelcw/upload/upload_structure/<?php echo $row_structure['img'];?>">
 
 
  
