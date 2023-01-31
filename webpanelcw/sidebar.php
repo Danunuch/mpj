@@ -84,13 +84,21 @@ $row_company = $company->fetchAll();
                 <!-- กลุ่มบริษัทในเครือ -->
                 <li class="sidebar-item  companies has-sub" id="companies">
                     <a href="companies" class='sidebar-link'>
-                    <i class="bi bi-bank"></i>
+                        <i class="bi bi-bank"></i>
                         <span>Affiliated companies</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
                             <?php for ($i = 0; $i < count($row_company); $i++) { ?>
-                                <a href="<?php if($row_company[$i]['id'] == 1){echo "detail_company1";}else if($row_company[$i]['id'] == 2){echo "detail_company2";}else if($row_company[$i]['id'] == 3){echo "detail_company3";}else if($row_company[$i]['id'] == 4){echo "detail_company4";} ?>" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
+                                <a href="<?php if ($row_company[$i]['id'] == 1) {
+                                                echo "detail_company1";
+                                            } else if ($row_company[$i]['id'] == 2) {
+                                                echo "detail_company2";
+                                            } else if ($row_company[$i]['id'] == 3) {
+                                                echo "detail_company3";
+                                            } else if ($row_company[$i]['id'] == 4) {
+                                                echo "detail_company4";
+                                            } ?>" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
                             <?php } ?>
 
 
@@ -101,7 +109,7 @@ $row_company = $company->fetchAll();
                 <!-- นักลงทุนสัมพันธ์ -->
                 <li class="sidebar-item  investor has-sub" id="investor">
                     <a href="investor" class='sidebar-link'>
-                    <i class="bi bi-people-fill"></i>
+                        <i class="bi bi-people-fill"></i>
                         <span>Investor Relations</span>
                     </a>
                     <ul class="submenu">
@@ -119,12 +127,12 @@ $row_company = $company->fetchAll();
                 <!-- การพัฒนาที่ยั่งยืน -->
                 <li class="sidebar-item sustainable has-sub" id="sustainable">
                     <a href="sustainable" class='sidebar-link'>
-                    <i class="bi bi-globe"></i>
+                        <i class="bi bi-globe"></i>
                         <span>Sustainable dev</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
-                        <a href="policy" class="sidebar-link">Policy</a>
+                            <a href="policy" class="sidebar-link">Policy</a>
                             <a href="safety" class="sidebar-link">Safety</a>
                             <a href="measure" class="sidebar-link">Measure</a>
                             <a href="social_policy" class="sidebar-link">Social policy</a>
@@ -145,7 +153,16 @@ $row_company = $company->fetchAll();
                         <li class="submenu-item">
                             <a href="contact_us" class="sidebar-link">Contact</a>
                             <?php for ($i = 0; $i < count($row_company); $i++) { ?>
-                                <a href="#" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
+
+                                <a href="<?php if ($row_company[$i]['id'] == 1) {
+                                                echo "contact_01";
+                                            } else if ($row_company[$i]['id'] == 2) {
+                                                echo "contact_02";
+                                            } else if ($row_company[$i]['id'] == 3) {
+                                                echo "contact_03";
+                                            } else if ($row_company[$i]['id'] == 4) {
+                                                echo "contact_04";
+                                            } ?>" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
                             <?php } ?></a>
                             <a href="work" class="sidebar-link">Work with us</a>
 
@@ -161,8 +178,16 @@ $row_company = $company->fetchAll();
                     <ul class="submenu">
                         <li class="submenu-item">
                             <?php for ($i = 0; $i < count($row_company); $i++) { ?>
-                                <!-- <a href="email?company_id=<?php echo $row_company[$i]['company_id'] ?>" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a> -->
-                                <a href="<?php if($row_company[$i]['id'] == 1){echo "email_1";}else if($row_company[$i]['id'] == 2){echo "email_2";}else if($row_company[$i]['id'] == 3){echo "email_3";}else if($row_company[$i]['id'] == 4){echo "email_4";} ?>" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
+
+                                <a href="<?php if ($row_company[$i]['id'] == 1) {
+                                                echo "email_1";
+                                            } else if ($row_company[$i]['id'] == 2) {
+                                                echo "email_2";
+                                            } else if ($row_company[$i]['id'] == 3) {
+                                                echo "email_3";
+                                            } else if ($row_company[$i]['id'] == 4) {
+                                                echo "email_4";
+                                            } ?>" class="sidebar-link"><?php echo $row_company[$i]['company_name']; ?></a>
                             <?php } ?></a>
                             <a href="work_with_us" class="sidebar-link">Work with us</a>
 

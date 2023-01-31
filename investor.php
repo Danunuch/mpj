@@ -13,7 +13,7 @@
   <title>mpj-logistics</title>
 
 
-
+  <link rel="shortcut icon" href="images/logo.svg" type="image/png">
 
   <link href="css/spinner.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">

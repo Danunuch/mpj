@@ -11,9 +11,6 @@ if (!isset($_SESSION['admin_login'])) {
 }
 
 
-$data_detail_pos = $conn->prepare("SELECT * FROM detail_pos");
-$data_detail_pos->execute();
-$row_detail_pos = $data_detail_pos->fetch(PDO::FETCH_ASSOC);
 
 
 if (isset($_GET['work_id'])) {
@@ -27,18 +24,23 @@ if (isset($_GET['work_id'])) {
 
 
 if (isset($_POST['edit_detail'])) {
+
     $content = $_POST['content'];
-  //  $id = $_POST['position_name'];
-    $id_position = $_POST['id_position'];
- 
-    
+    $id = $_POST['position_name'];
+
+
+    // $content = $_POST['content'];
+    // $position_name = $_POST['position_name'];
+    // $id_pos = $_POST['id_pos'];
+
+
     $detail_pos = $conn->prepare("UPDATE detail_pos SET content = :content, id = :id WHERE id_pos = :id_pos");
     $detail_pos->bindParam(":content", $content);
-    $detail_pos->bindParam(":id", $id_position);
-    $detail_pos->bindParam(":id_pos", $id);
+    $detail_pos->bindParam(":id", $position_name);
+    $detail_pos->bindParam(":id_pos", $id_pos);
     $detail_pos->execute();
 
- 
+
 
 
     if ($detail_pos) {
@@ -88,9 +90,10 @@ if (isset($_POST['edit_detail'])) {
 </head>
 <?php
 
-$select_stmt = $conn->prepare("SELECT * FROM position");
+$select_stmt = $conn->prepare("SELECT * FROM position WHERE id = :id");
+$select_stmt->bindParam(':id', $row_detail['id']);
 $select_stmt->execute();
-$query =  $select_stmt->fetchAll();
+$query =  $select_stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -119,15 +122,15 @@ $query =  $select_stmt->fetchAll();
                             <?php
 
                             $stmt = $conn->prepare("SELECT* FROM position WHERE id = :id");
-                            $stmt ->bindParam(':id', $row_detail_pos['id']);
-                            $stmt ->execute();
-                            $query =  $stmt ->fetch(PDO::FETCH_ASSOC);
+                            $stmt->bindParam(':id', $row_detail['id']);
+                            $stmt->execute();
+                            $query =  $stmt->fetch(PDO::FETCH_ASSOC);
 
                             ?>
                             <div class="container">
                                 <div class="cer-name">
                                     <h6 for="position_name" class="col-form-label">Detail Position</h6>
-                                    <input type="hidden"name="id_position" value="<?php echo $query['id'] ?>" >
+                                    <input type="hidden" name="id_pos" value="<?php echo $row_detail_pos['id_pos'] ?>">
                                     <input type="text" name="position_name" value="<?php echo $query['position_name'] ?>" class="form-control">
 
 
@@ -137,7 +140,7 @@ $query =  $select_stmt->fetchAll();
 
                             <div class="card-body">
                                 <div class="content-text">
-                                    <textarea name="content"><?php echo $row_detail_pos['content']; ?></textarea>
+                                    <textarea name="content"><?php echo $row_detail['content']; ?></textarea>
                                     <script>
                                         tinymce.init({
                                             selector: 'textarea',

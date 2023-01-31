@@ -266,7 +266,7 @@ $row_work_content = $stmt->fetch(PDO::FETCH_ASSOC);
                         <div class="card-header">
                             <h4 class="card-title">Detail Position</h4>
                             <div class="flex-end">
-                                <a href="detail_pos_add"><button type="button" class="btn btn-add">Add</button></a>
+                                <a href="detail_pos_add"><button type="button" class="btn btn-edit1">Add</button></a>
                                 <!-- <button type="submit" onclick="return confirm('Do you want to delete all?');" name="delete_all" class="btn btn-del">Delete</button> -->
 
                             </div>

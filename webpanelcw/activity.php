@@ -209,17 +209,17 @@ if (isset($_POST['edit_activity'])) {
 // }
 
 //delete img blog
-// if (isset($_POST['del-img'])) {
-//     $img_id = $_POST['del-img'];
+if (isset($_POST['del-img'])) {
+    $img_id = $_POST['del-img'];
 
-//     $delete_img = $conn->prepare("DELETE FROM activity_img WHERE id = :id");
-//     $delete_img->bindParam(":id", $img_id);
-//     $delete_img->execute();
+    $delete_img = $conn->prepare("DELETE FROM activity_img WHERE id = :id");
+    $delete_img->bindParam(":id", $img_id);
+    $delete_img->execute();
 
-//     if ($delete_img) {
-//         echo "<meta http-equiv='refresh' content='1.5;url=activity'>";
-//     }
-
+    if ($delete_img) {
+        echo "<meta http-equiv='refresh' content='1.5;url=activity'>";
+    }
+}
 
 if (isset($_POST['delete'])) {
     $id = $_POST['delete'];

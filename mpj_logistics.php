@@ -55,7 +55,7 @@ if (isset($_GET['lang'])) {
   <meta name="description" content="mpj-logistics">
   <meta name="keyword" content="mpj-logistics">
   <meta name="author" content="mpj-logistics">
-
+  <link rel="shortcut icon" href="images/logo.svg" type="image/png">
   <title>mpj-logistics</title>
 
 
@@ -139,7 +139,8 @@ if (isset($_GET['lang'])) {
 
         <br>
         <br>
-        <div class="row"> <?php for ($i = 0; $i < count($row_blog_company1); $i++) { ?>
+        <div class="row"> 
+          <?php for ($i = 0; $i < count($row_blog_company1); $i++) { ?>
             <div class="col-lg-4 text-center">
 
               <img class="img-fluid mb-4" src="webpanelcw/upload/upload_blog1/<?php echo $row_blog_company1[$i]['img']; ?>">

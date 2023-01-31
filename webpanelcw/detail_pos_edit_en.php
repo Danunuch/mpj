@@ -37,7 +37,7 @@ if (isset($_POST['edit_detail'])) {
     $detail_pos->bindParam(":id_pos", $id_pos);
     $detail_pos->execute();
 
-    $id_detail_pos = $conn->lastInsertId();
+ 
 
 
     if ($detail_pos) {
@@ -87,9 +87,10 @@ if (isset($_POST['edit_detail'])) {
 </head>
 <?php
 
-$select_stmt = $conn->prepare("SELECT * FROM position_en");
+$select_stmt = $conn->prepare("SELECT * FROM position_en WHERE id = :id");
+$select_stmt->bindParam(':id', $row_detail['id']);
 $select_stmt->execute();
-$query =  $select_stmt->fetchAll();
+$query =  $select_stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -118,7 +119,7 @@ $query =  $select_stmt->fetchAll();
                             <?php
 
                             $stmt = $conn->prepare("SELECT* FROM position_en WHERE id = :id");
-                            $stmt ->bindParam(':id', $row_detail_pos['id']);
+                            $stmt ->bindParam(':id', $row_detail['id']);
                             $stmt ->execute();
                             $query =  $stmt ->fetch(PDO::FETCH_ASSOC);
 
@@ -126,6 +127,7 @@ $query =  $select_stmt->fetchAll();
                             <div class="container">
                                 <div class="cer-name">
                                     <h6 for="position_name" class="col-form-label">Detail Position</h6>
+                                    <input type="hidden" name="id_pos" value="<?php echo $row_detail['id_pos'] ?>">
                                     <input type="text" name="position_name" value="<?php echo $query['position_name'] ?>" class="form-control">
 
 
@@ -135,7 +137,7 @@ $query =  $select_stmt->fetchAll();
 
                             <div class="card-body">
                                 <div class="content-text">
-                                    <textarea name="content"><?php echo $row_detail_pos['content']; ?></textarea>
+                                    <textarea name="content"><?php echo $row_detail['content']; ?></textarea>
                                     <script>
                                         tinymce.init({
                                             selector: 'textarea',

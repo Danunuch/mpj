@@ -36,7 +36,7 @@ if (isset($_POST['add-detail_pos'])) {
                 echo "<script>
                 $(document).ready(function() {
                     Swal.fire({
-                        text: 'Add Certificate has been completed.',
+                        text: 'Add Detail Position has been completed.',
                         icon: 'success',
                         timer: 10000,
                         showConfirmButton: false

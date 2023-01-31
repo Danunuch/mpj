@@ -55,7 +55,7 @@ if (isset($_GET['activity_id'])) {
   <meta name="description" content="mpj-logistics">
   <meta name="keyword" content="mpj-logistics">
   <meta name="author" content="mpj-logistics">
-
+  <link rel="shortcut icon" href="images/logo.svg" type="image/png">
   <title>mpj-logistics</title>
 
 
