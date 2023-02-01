@@ -22,7 +22,7 @@ if (isset($_GET['lang'])) {
   $row_contact_01 = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-$secret = "#";
+$secret = "6Le5m0EkAAAAAApxCFrG9CsvTZSUImQaKh1ScaiC";
 
 
 if (isset($_POST['g-recaptcha-response'])) {
@@ -209,7 +209,7 @@ if (isset($_POST['g-recaptcha-response'])) {
 
 
 
-              <img src="images/Captcha-demo.gif" width="280" height="76" alt="">
+            <div class="g-recaptcha" data-sitekey="6Le5m0EkAAAAAJvQtnudYiRZBY71xFuE50xciETa" style="display: flex;justify-content: center;"></div>
 
 
               <div class="clearfix mt-3"></div>
@@ -246,7 +246,7 @@ if (isset($_POST['g-recaptcha-response'])) {
   <?php include("footer.php"); ?>
 
 
-
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </body>
 

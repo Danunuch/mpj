@@ -1,4 +1,5 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
 require_once('webpanelcw/config/mpj_db.php');
 error_reporting(0);
 if (!isset($_SESSION)) {
@@ -7,19 +8,17 @@ if (!isset($_SESSION)) {
 
 
 
-$stmt = $conn->prepare("SELECT * FROM email_1");
-$stmt->execute();
-$row_email = $stmt->fetchAll();
+$st = $conn->prepare("SELECT * FROM email_6");
+$st->execute();
+$row_email_6 = $st->fetchAll();
 
-use PHPMailer\PHPMailer\PHPMailer;
+
 
 require_once 'PHPMailer/Exception.php';
 require_once 'PHPMailer/PHPMailer.php';
 require_once 'PHPMailer/SMTP.php';
 
-
-$secret = "6Le5m0EkAAAAAApxCFrG9CsvTZSUImQaKh1ScaiC";
-
+$secret = "6LcqsUEkAAAAAL-SQkVRts-_xijM3Ii6nbA6GBh_";
 
 if (isset($_POST['g-recaptcha-response'])) {
 
@@ -29,9 +28,9 @@ if (isset($_POST['g-recaptcha-response'])) {
 
 	if (!$captcha) {
 		echo "<script>alert('คุณไม่ได้ป้อน reCAPTCHA อย่างถูกต้อง')</script>";
-		echo "<meta http-equiv='refresh' content='0;url=contact-01'>";
+		echo "<meta http-equiv='refresh' content='0;url=career'>";
 	}
-	if (isset($_POST['sentmail01']) && $responseData->success) {
+	if (isset($_POST['sentmail6']) && $responseData->success) {
 		$title = addslashes($_POST['title']);
 		$fullname = addslashes($_POST['fullname']);
 		$email = addslashes($_POST['email']);
@@ -57,21 +56,21 @@ if (isset($_POST['g-recaptcha-response'])) {
 		$mail->From = $email;
 		$mail->Subject = $title;
 		$mail->Body = $msg;
-		for ($i = 0; $i < count($row_email); $i++) {
-			$mail->addAddress($row_email[$i]['email']);
+		for ($i = 0; $i < count($row_email_6); $i++) {
+			$mail->addAddress($row_email_6[$i]['email']);
 		}
 
 		// $mail->addAddress($to1);
 
 		// $attach_file = $folder . "" . $file_name;
 		// $mail->addAttachment($attach_file, $file_name);
-		// $mail->send();
+		$mail->send();
 
 		if ($mail) {
 			echo "<script>alert('ส่ง Email สำเร็จ')</script>";
-			echo "<meta http-equiv='refresh' content='0;url=contact-01.php'>";
+			echo "<meta http-equiv='refresh' content='0;url=career.php'>";
 		} else {
 			echo "<script>alert('ส่ง Email ไม่สำเร็จ')</script>";
 		}
 	}
-}
+} 

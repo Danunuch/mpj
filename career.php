@@ -42,7 +42,7 @@ if (isset($_GET['lang'])) {
   $row_position = $stmt->fetchAll();
 }
 
-$secret = "#";
+$secret = "6LcqsUEkAAAAAL-SQkVRts-_xijM3Ii6nbA6GBh_";
 
 
 if (isset($_POST['g-recaptcha-response'])) {
@@ -624,7 +624,7 @@ if (isset($_POST['g-recaptcha-response'])) {
 
 
 
-                <img src="images/Captcha-demo.gif" width="280" height="76" alt="">
+              <div class="g-recaptcha" data-sitekey="6LcqsUEkAAAAANlj03__XSnP0LfPDHL_056Boo0Y" style="display: flex;justify-content: center;"></div>
 
 
                 <div class="clearfix mt-3"></div>
@@ -662,7 +662,7 @@ if (isset($_POST['g-recaptcha-response'])) {
 
   <?php include("footer.php"); ?>
 
-
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 
 </body>
