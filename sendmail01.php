@@ -1,6 +1,7 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
 require_once('webpanelcw/config/mpj_db.php');
-error_reporting(0);
+//error_reporting(0);
 if (!isset($_SESSION)) {
 	session_start();
 }
@@ -11,14 +12,14 @@ $stmt = $conn->prepare("SELECT * FROM email_1");
 $stmt->execute();
 $row_email = $stmt->fetchAll();
 
-use PHPMailer\PHPMailer\PHPMailer;
+
 
 require_once 'PHPMailer/Exception.php';
 require_once 'PHPMailer/PHPMailer.php';
 require_once 'PHPMailer/SMTP.php';
 
 
-$secret = "6Le5m0EkAAAAAApxCFrG9CsvTZSUImQaKh1ScaiC";
+$secret = "6LcqsUEkAAAAAL-SQkVRts-_xijM3Ii6nbA6GBh_";
 
 
 if (isset($_POST['g-recaptcha-response'])) {
@@ -38,7 +39,7 @@ if (isset($_POST['g-recaptcha-response'])) {
 		$phone = addslashes($_POST['phone']);
 		$message = addslashes($_POST['message']);
 
-		// $to = "programmer@thaibyhost.com";
+		 //$to = "programmer1@thaibyhost.com";
 		// $to1 = "programmer1@thaibyhost.com";
 		// $attachment = $_FILES["pdf"]["tmp_name"];
 		// $folder = "upload/";
@@ -61,11 +62,11 @@ if (isset($_POST['g-recaptcha-response'])) {
 			$mail->addAddress($row_email[$i]['email']);
 		}
 
-		// $mail->addAddress($to1);
+		// $mail->addAddress($to);
 
 		// $attach_file = $folder . "" . $file_name;
 		// $mail->addAttachment($attach_file, $file_name);
-		// $mail->send();
+		 $mail->send();
 
 		if ($mail) {
 			echo "<script>alert('ส่ง Email สำเร็จ')</script>";

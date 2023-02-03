@@ -196,9 +196,8 @@ if (isset($_POST['delete_share'])) {
 
                                 <br>
                                 <form method="post">
-                                    <div class="box-lang">
                                     <div class="flex-end">
-                                        <a href="shareholder_add"><button type="button" class="btn btn-edit1">Add</button></a>
+                                        <a href="shareholder_add"><button type="button" class="btn btn-edit">Add</button></a>
                                     </div> </div>
                                     <div class="card-body" style="display: flex;">
                                         <div class="table-responsive">

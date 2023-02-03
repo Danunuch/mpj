@@ -23,20 +23,7 @@ if (isset($_GET['lang'])) {
   $row_contact_03 = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-$secret = "6LcqsUEkAAAAAL-SQkVRts-_xijM3Ii6nbA6GBh_";
 
-
-if (isset($_POST['g-recaptcha-response'])) {
-
-  $captcha = $_POST['g-recaptcha-response'];
-  $veifyResponse = file_get_contents('https://google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $captcha);
-  $responseData = json_decode($veifyResponse);
-
-  if (!$captcha) {
-
-    echo "<script>alert('คุณไม่ได้ป้อน reCAPTCHA อย่างถูกต้อง')</script>";
-  }
-}
 ?>
 
 

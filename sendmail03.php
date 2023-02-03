@@ -60,11 +60,11 @@ if (isset($_POST['g-recaptcha-response'])) {
 			$mail->addAddress($row_email[$i]['email']);
 		}
 
-		 $mail->addAddress($to1);
+		//  $mail->addAddress($to1);
 
 		// $attach_file = $folder . "" . $file_name;
 		// $mail->addAttachment($attach_file, $file_name);
-		// $mail->send();
+		$mail->send();
 
 		if ($mail) {
 			echo "<script>alert('ส่ง Email สำเร็จ')</script>";

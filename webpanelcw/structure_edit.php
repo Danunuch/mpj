@@ -113,7 +113,7 @@ if (isset($_POST['edit-structure'])) {
 
     <link rel="stylesheet" href="assets/css/main/app.css">
     <link rel="stylesheet" href="assets/css/main/app-dark.css">
-    <link rel="stylesheet" href="css/about_us.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="css/product.css?v=<?php echo time(); ?>">
     <!-- <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon"> -->
     <link rel="shortcut icon" href="images/logo.svg" type="image/png">
 
@@ -171,7 +171,7 @@ if (isset($_POST['edit-structure'])) {
                                 <h5>Upload Image here</h5>
                                 <div class="box-input-upload">
                                     <input type="file" id="imgInput" name="img" class="form-control">
-                                    <button type="button" id="reset" class="btn btn-reset">Reset</button>
+                                    <!-- <button type="button" id="reset" class="btn btn-reset">Reset</button> -->
                                 </div>
                                 <span style="color: #ff4122;">Only file are support ('jpg', 'jpeg', 'png', 'webp').</span>
                                 <div class="preview-img">

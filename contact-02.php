@@ -24,25 +24,11 @@ if (isset($_GET['lang'])) {
 }
 
 
-$secret = "6LcqsUEkAAAAAL-SQkVRts-_xijM3Ii6nbA6GBh_";
-
-
-if (isset($_POST['g-recaptcha-response'])) {
-
-  $captcha = $_POST['g-recaptcha-response'];
-  $veifyResponse = file_get_contents('https://google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $captcha);
-  $responseData = json_decode($veifyResponse);
-
-  if (!$captcha) {
-
-    echo "<script>alert('คุณไม่ได้ป้อน reCAPTCHA อย่างถูกต้อง')</script>";
-  }
-}
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en" class="desktop">
+
 <head>
 
   <link rel="shortcut icon" href="images/favicon.ico">
@@ -61,115 +47,113 @@ if (isset($_POST['g-recaptcha-response'])) {
   <link href="css/spinner.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
 
-  
+
   <script src="js/core.min.js"></script>
   <script src="js/script.min.js"></script>
 
   <script src="js/jquery.min.js"></script>
 
   <script type="text/javascript">
-
-    'use strict'; 
-    var $window = $(window); 
+    'use strict';
+    var $window = $(window);
     $window.on({
-      'load': function () {
+      'load': function() {
 
-        /* Preloader */ 
+        /* Preloader */
         $('.spinner').fadeOut(2500);
       },
-      
-    });
 
+    });
   </script>
 
-  
+
 </head>
 
 <body>
- <!-- Pre loader -->
- <div class="spinner" id="loading-body">
-  <div> 
-    <div class="bounce1"></div>
-    <div class="bounce2"></div>
-    <div class="bounce3"></div>
-  </div>
-</div>
-
-<?php include("header.php");?>
-
-<main>
-
-
- <img class="img-fluid w-100" src="upload/bg01.jpg">
-
-
- <?php include("navigator.php");?>
-
-
- <section id="page-section">
-  <div class="container-xxl">
-
-
-  <div class="text-center mb-5">
-     <h3 class="text-warning"><?php echo $row_contact_02['company_name']; ?></h3>
-   </div>
-
-
-
-
-
-
-
-
-
-   <div class="row align-items-center">
-
-    <div class="col-lg-6">
-
-
-      <p><i class="icofont-google-map text-warning"></i> <?php echo $row_contact_02['address']; ?></p>
-      <p class="mb-0"><i class="icofont-phone text-warning"></i> <?php if (isset($_GET['lang'])) {
-                if ($_GET['lang'] == "en") {
-                  echo 'Tel : ';
-                } else {
-                  echo 'โทรศัพท์ : ';
-                }
-              } else {
-                echo "โทรศัพท์ : ";
-              } ?> <?php echo $row_contact_02['tel1']; ?></p>
-      <p class="mb-0"><i class="icofont-envelope text-warning"></i> <?php if (isset($_GET['lang'])) {
-                if ($_GET['lang'] == "en") {
-                  echo 'Email : ';
-                } else {
-                  echo 'อีเมล :';
-                }
-              } else {
-                echo "อีเมล :";
-              } ?> <?php echo $row_contact_02['email']; ?></p>
-
-
+  <!-- Pre loader -->
+  <div class="spinner" id="loading-body">
+    <div>
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
     </div>
-
-
-
-
-
-    <div class="col-lg-6">
-      <div class="ratio ratio-16x9">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.700814645436!2d100.96782671485057!3d13.11813021519536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3102b8035011af41%3A0xee65c2fc74b6976d!2sMPJ%20LOGISTICS!5e0!3m2!1sth!2sth!4v1675141305560!5m2!1sth!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-    </div>
-
-
-
-
-
-
   </div>
 
+  <?php include("header.php"); ?>
+
+  <main>
 
 
-  <form method="POST" action="sendmail02.php">
+    <img class="img-fluid w-100" src="upload/bg01.jpg">
+
+
+    <?php include("navigator.php"); ?>
+
+
+    <section id="page-section">
+      <div class="container-xxl">
+
+
+        <div class="text-center mb-5">
+          <h3 class="text-warning"><?php echo $row_contact_02['company_name']; ?></h3>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="row align-items-center">
+
+          <div class="col-lg-6">
+
+
+            <p><i class="icofont-google-map text-warning"></i> <?php echo $row_contact_02['address']; ?></p>
+            <p class="mb-0"><i class="icofont-phone text-warning"></i> <?php if (isset($_GET['lang'])) {
+                                                                          if ($_GET['lang'] == "en") {
+                                                                            echo 'Tel : ';
+                                                                          } else {
+                                                                            echo 'โทรศัพท์ : ';
+                                                                          }
+                                                                        } else {
+                                                                          echo "โทรศัพท์ : ";
+                                                                        } ?> <?php echo $row_contact_02['tel1']; ?></p>
+            <p class="mb-0"><i class="icofont-envelope text-warning"></i> <?php if (isset($_GET['lang'])) {
+                                                                            if ($_GET['lang'] == "en") {
+                                                                              echo 'Email : ';
+                                                                            } else {
+                                                                              echo 'อีเมล :';
+                                                                            }
+                                                                          } else {
+                                                                            echo "อีเมล :";
+                                                                          } ?> <?php echo $row_contact_02['email']; ?></p>
+
+
+          </div>
+
+
+
+
+
+          <div class="col-lg-6">
+            <div class="ratio ratio-16x9">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.700814645436!2d100.96782671485057!3d13.11813021519536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3102b8035011af41%3A0xee65c2fc74b6976d!2sMPJ%20LOGISTICS!5e0!3m2!1sth!2sth!4v1675141305560!5m2!1sth!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+
+
+
+
+
+
+        </div>
+
+
+
+        <form method="POST" action="sendmail02.php">
           <div class="row mt-5">
             <div class="col-md-6">
               <div class="form-group mb-3">
@@ -207,7 +191,7 @@ if (isset($_POST['g-recaptcha-response'])) {
 
 
 
-            <div class="g-recaptcha" data-sitekey="6LcqsUEkAAAAANlj03__XSnP0LfPDHL_056Boo0Y" style="display: flex;justify-content: center;"></div>
+              <div class="g-recaptcha" data-sitekey="6LcqsUEkAAAAANlj03__XSnP0LfPDHL_056Boo0Y" style="display: flex;justify-content: center;"></div>
 
 
               <div class="clearfix mt-3"></div>
@@ -233,19 +217,20 @@ if (isset($_POST['g-recaptcha-response'])) {
 
 
 
-</div>
+      </div>
 
-</section>
-
-
-
-</main>
+    </section>
 
 
-<?php include("footer.php");?>
 
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  </main>
+
+
+  <?php include("footer.php"); ?>
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 
 </body>
+
 </html>

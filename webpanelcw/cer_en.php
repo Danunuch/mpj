@@ -223,7 +223,7 @@ if (isset($_POST['delete_certi'])) {
                         <div class="card-header">
                             <h4 class="card-title">Certificates & Awards</h4>
                             <div class="flex-end">
-                                <a href="certificate_add_en"><button type="button" class="btn btn-add">Add</button></a>
+                                <a href="certificate_add_en"><button type="button" class="btn btn-edit1">Add</button></a>
                                 <!-- <button type="submit" onclick="return confirm('Do you want to delete all?');" name="delete_all" class="btn btn-del">Delete</button> -->
 
                             </div>

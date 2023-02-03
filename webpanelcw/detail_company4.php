@@ -539,7 +539,7 @@ $row_blog_company = $stmt->fetchAll();
                         <h4 class="card-title">Blog Company</h4>
                         <div class="box-lang">
 
-                            <a type="input" data-bs-toggle="modal" class="btn" style="background-color: #fd7e14; color: #FFF;" href="#addactivity">Add</a>
+                            <a type="input" data-bs-toggle="modal" class="btn btn-edit" href="#addactivity">Add</a>
                         </div>
                     </div>
                     <div class="container">

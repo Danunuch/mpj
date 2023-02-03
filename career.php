@@ -253,7 +253,7 @@ if (isset($_POST['g-recaptcha-response'])) {
                                                                                                                                                         } ?></a>
           </div>
 
-          <form method="POST" action="sendmail.php">
+          <form method="POST" action="sendmail.php" enctype="multipart/form-data">
             <div class="row mt-5">
               <div class="col-md-6">
                 <div class="form-group mb-3">
@@ -469,9 +469,9 @@ if (isset($_POST['g-recaptcha-response'])) {
               </div>
               <div class="col-md-12 text-center">
 
+                <div class="g-recaptcha" data-sitekey="6LcqsUEkAAAAANlj03__XSnP0LfPDHL_056Boo0Y" style="display: flex;justify-content: center;"></div>
 
-
-
+                <br> 
                 <button type="submit" name='sentmail' class="btn btn btn-dark btn-lg rounded-0 px-lg-5"><?php if (isset($_GET['lang'])) {
                                                                                                           if ($_GET['lang'] == "en") {
                                                                                                             echo 'Apply for work';
@@ -480,7 +480,7 @@ if (isset($_POST['g-recaptcha-response'])) {
                                                                                                           }
                                                                                                         } else {
                                                                                                           echo "สมัครงาน";
-                                                                                                        } ?></a>
+                                                                                                        } ?></button>
               </div>
 
 
@@ -506,7 +506,7 @@ if (isset($_POST['g-recaptcha-response'])) {
           </div>
 
 
-          <form method="POST" action="sendmail.php">
+          <form method="POST" action="sendmail06.php">
             <div class="row mt-5">
               <div class="col-md-6">
                 <div class="form-group mb-3">
@@ -520,14 +520,14 @@ if (isset($_POST['g-recaptcha-response'])) {
                                             echo "ชื่อเรื่อง";
                                           } ?></label>
                   <input name="title" type="text" class="form-control rounded-0" id="inputName" placeholder="<?php if (isset($_GET['lang'])) {
-                                                                                                                        if ($_GET['lang'] == "en") {
-                                                                                                                          echo 'Fill in title';
-                                                                                                                        } else {
-                                                                                                                          echo 'กรอกชื่อเรื่อง';
-                                                                                                                        }
-                                                                                                                      } else {
-                                                                                                                        echo "กรอกชื่อเรื่อง";
-                                                                                                                      } ?>">
+                                                                                                                if ($_GET['lang'] == "en") {
+                                                                                                                  echo 'Fill in title';
+                                                                                                                } else {
+                                                                                                                  echo 'กรอกชื่อเรื่อง';
+                                                                                                                }
+                                                                                                              } else {
+                                                                                                                echo "กรอกชื่อเรื่อง";
+                                                                                                              } ?>">
                 </div>
               </div>
               <div class="col-md-6">
@@ -542,14 +542,14 @@ if (isset($_POST['g-recaptcha-response'])) {
                                             echo "ชื่อ";
                                           } ?></label>
                   <input name="fullname" type="text" class="form-control rounded-0" id="inputName" placeholder="<?php if (isset($_GET['lang'])) {
-                                                                                                                        if ($_GET['lang'] == "en") {
-                                                                                                                          echo 'Fill in name';
-                                                                                                                        } else {
-                                                                                                                          echo 'กรอกชื่อ';
-                                                                                                                        }
-                                                                                                                      } else {
-                                                                                                                        echo "กรอกชื่อ";
-                                                                                                                      } ?>">
+                                                                                                                  if ($_GET['lang'] == "en") {
+                                                                                                                    echo 'Fill in name';
+                                                                                                                  } else {
+                                                                                                                    echo 'กรอกชื่อ';
+                                                                                                                  }
+                                                                                                                } else {
+                                                                                                                  echo "กรอกชื่อ";
+                                                                                                                } ?>">
                 </div>
               </div>
               <div class="col-md-6">
@@ -564,14 +564,14 @@ if (isset($_POST['g-recaptcha-response'])) {
                                             echo "อีเมล";
                                           } ?></label>
                   <input name="email" type="email" class="form-control rounded-0" id="inputEmail" placeholder="<?php if (isset($_GET['lang'])) {
-                                                                                                                          if ($_GET['lang'] == "en") {
-                                                                                                                            echo 'Enter email';
-                                                                                                                          } else {
-                                                                                                                            echo 'กรอกอีเมล';
-                                                                                                                          }
-                                                                                                                        } else {
-                                                                                                                          echo "กรอกอีเมล";
-                                                                                                                        } ?>">
+                                                                                                                  if ($_GET['lang'] == "en") {
+                                                                                                                    echo 'Enter email';
+                                                                                                                  } else {
+                                                                                                                    echo 'กรอกอีเมล';
+                                                                                                                  }
+                                                                                                                } else {
+                                                                                                                  echo "กรอกอีเมล";
+                                                                                                                } ?>">
                 </div>
               </div>
               <div class="col-md-6">
@@ -585,15 +585,15 @@ if (isset($_POST['g-recaptcha-response'])) {
                                           } else {
                                             echo "โทรศัพท์";
                                           } ?></label>
-                  <input name="phone" type="phone" class="form-control rounded-0" id="inputEmail" placeholder="<?php if (isset($_GET['lang'])) {
-                                                                                                                        if ($_GET['lang'] == "en") {
-                                                                                                                          echo 'Fill in the phone';
-                                                                                                                        } else {
-                                                                                                                          echo 'กรอกโทรศัพท์';
-                                                                                                                        }
-                                                                                                                      } else {
-                                                                                                                        echo "กรอกโทรศัพท์";
-                                                                                                                      } ?>">
+                  <input name="phone" type="tel" class="form-control rounded-0" id="inputEmail" placeholder="<?php if (isset($_GET['lang'])) {
+                                                                                                                  if ($_GET['lang'] == "en") {
+                                                                                                                    echo 'Fill in the phone';
+                                                                                                                  } else {
+                                                                                                                    echo 'กรอกโทรศัพท์';
+                                                                                                                  }
+                                                                                                                } else {
+                                                                                                                  echo "กรอกโทรศัพท์";
+                                                                                                                } ?>">
                 </div>
               </div>
 
@@ -609,14 +609,14 @@ if (isset($_POST['g-recaptcha-response'])) {
                                             echo "ข้อความ";
                                           } ?></label>
                   <textarea name="message" class="form-control rounded-0" rows="8" placeholder="<?php if (isset($_GET['lang'])) {
-                                                                                                        if ($_GET['lang'] == "en") {
-                                                                                                          echo 'Write your message here.';
-                                                                                                        } else {
-                                                                                                          echo 'เขียนข้อความของคุณที่นี่';
-                                                                                                        }
-                                                                                                      } else {
-                                                                                                        echo "เขียนข้อความของคุณที่นี่";
-                                                                                                      } ?>" id="textareaMessage"></textarea>
+                                                                                                  if ($_GET['lang'] == "en") {
+                                                                                                    echo 'Write your message here.';
+                                                                                                  } else {
+                                                                                                    echo 'เขียนข้อความของคุณที่นี่';
+                                                                                                  }
+                                                                                                } else {
+                                                                                                  echo "เขียนข้อความของคุณที่นี่";
+                                                                                                } ?>" id="textareaMessage"></textarea>
                 </div>
 
               </div>
@@ -624,20 +624,20 @@ if (isset($_POST['g-recaptcha-response'])) {
 
 
 
-              <div class="g-recaptcha" data-sitekey="6LcqsUEkAAAAANlj03__XSnP0LfPDHL_056Boo0Y" style="display: flex;justify-content: center;"></div>
+                <div class="g-recaptcha" data-sitekey="6LcqsUEkAAAAANlj03__XSnP0LfPDHL_056Boo0Y" style="display: flex;justify-content: center;"></div>
 
 
                 <div class="clearfix mt-3"></div>
 
-                <button type="submit" name='sentmail6' class="btn btn btn-dark btn-lg rounded-0 px-lg-5"><i class="icofont-send-mail"></i> <?php if (isset($_GET['lang'])) {
-                                                                                                                  if ($_GET['lang'] == "en") {
-                                                                                                                    echo 'Send a message';
-                                                                                                                  } else {
-                                                                                                                    echo 'ส่งข้อความ';
-                                                                                                                  }
-                                                                                                                } else {
-                                                                                                                  echo "ส่งข้อความ";
-                                                                                                                } ?></a>
+               <button type="submit" name='sentmail6' class="btn btn btn-dark btn-lg rounded-0 px-lg-5"><i class="icofont-send-mail"></i> <?php if (isset($_GET['lang'])) {
+                                                                                                                                              if ($_GET['lang'] == "en") {
+                                                                                                                                                echo 'Send a message';
+                                                                                                                                              } else {
+                                                                                                                                                echo 'ส่งข้อความ';
+                                                                                                                                              }
+                                                                                                                                            } else {
+                                                                                                                                              echo "ส่งข้อความ";
+                                                                                                                                            } ?></button>
                 <a href="" class="btn btn btn-dark btn-lg rounded-0 px-lg-5"><i class="icofont-refresh"></i> <?php if (isset($_GET['lang'])) {
                                                                                                                 if ($_GET['lang'] == "en") {
                                                                                                                   echo 'Cleanup';
